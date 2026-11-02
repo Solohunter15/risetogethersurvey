@@ -37,9 +37,9 @@ export const WizardNav: React.FC<WizardNavProps> = ({
             <button
               type="button"
               onClick={onBackToHero}
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#181622] hover:bg-[#F5F2E9] dark:hover:bg-[#201D2E] text-[#0B0A0F] dark:text-white font-bold text-xs uppercase tracking-wide transition-all shadow-midnight-sm hover:-translate-y-0.5 active:translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#181622] hover:bg-[#F5F2E9] dark:hover:bg-[#201D2E] text-[#0B0A0F] dark:text-white font-bold text-xs uppercase tracking-wide transition-all shadow-midnight-sm hover:-translate-y-0.5 active:translate-y-0.5 cursor-pointer"
             >
-              <LayoutGrid className="w-3.5 h-3.5 text-[#F15E21]" />
+              <LayoutGrid className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
               <span>← Back to Overview</span>
             </button>
           )
@@ -47,10 +47,10 @@ export const WizardNav: React.FC<WizardNavProps> = ({
           <button
             type="button"
             onClick={onPrev}
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#181622] hover:bg-[#F5F2E9] dark:hover:bg-[#201D2E] text-[#0B0A0F] dark:text-white font-bold text-xs uppercase tracking-wide transition-all shadow-midnight-sm hover:-translate-y-0.5 active:translate-y-0.5"
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#181622] hover:bg-[#F5F2E9] dark:hover:bg-[#201D2E] text-[#0B0A0F] dark:text-white font-bold text-xs uppercase tracking-wide transition-all shadow-midnight-sm hover:-translate-y-0.5 active:translate-y-0.5 cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Previous Chapter</span>
+            <span>Previous Section</span>
           </button>
         )}
       </div>
@@ -98,7 +98,7 @@ export const WizardNav: React.FC<WizardNavProps> = ({
             </>
           ) : (
             <>
-              <span>Next Chapter</span>
+              <span>Next Section</span>
               <ArrowRight className="w-4 h-4" />
             </>
           )}

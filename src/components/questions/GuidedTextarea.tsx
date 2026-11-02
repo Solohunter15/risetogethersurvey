@@ -61,7 +61,7 @@ export const GuidedTextarea: React.FC<GuidedTextareaProps> = ({
         {title && (
           <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
             {title}
-            {required && <span className="text-[#F15E21] ml-1" title="Required">*</span>}
+            {required && <span className="text-[#0B0A0F] dark:text-[#CCFF00] font-black ml-1" title="Required">*</span>}
           </h3>
         )}
         {instruction && (

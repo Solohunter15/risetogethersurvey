@@ -29,14 +29,14 @@ export const DraftRestoredBanner: React.FC = () => {
     <div
       role="status"
       aria-live="polite"
-      className="mb-6 rounded-2xl border border-purple-200 dark:border-purple-800 bg-purple-50/90 dark:bg-purple-950/60 p-4 shadow-xs backdrop-blur-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm animate-slideInDown"
+      className="mb-6 rounded-2xl border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#181622] p-4 shadow-midnight-sm dark:shadow-lime-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm animate-slideInDown"
     >
       <div className="flex items-center space-x-3">
-        <div className="p-2 rounded-xl bg-purple-200/70 dark:bg-purple-900/80 text-purple-800 dark:text-purple-300 flex-shrink-0">
-          <History className="w-4 h-4" />
+        <div className="p-2 rounded-xl bg-[#CCFF00] text-[#0B0A0F] flex-shrink-0">
+          <History className="w-4 h-4 stroke-[2.5]" />
         </div>
         <div>
-          <span className="font-bold text-purple-900 dark:text-purple-200">
+          <span className="font-bold text-[#0B0A0F] dark:text-[#CCFF00]">
             Survey draft restored
           </span>
           <p className="text-slate-600 dark:text-slate-300 text-xs mt-0.5">

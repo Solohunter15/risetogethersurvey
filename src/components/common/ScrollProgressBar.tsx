@@ -31,9 +31,9 @@ export const ScrollProgressBar: React.FC = () => {
       {/* Background track */}
       <div className="w-full h-full bg-[#0B0A0F]/5 dark:bg-white/5" />
 
-      {/* Dynamic neon lime / flame orange gradient scroll bar */}
+      {/* Dynamic neon lime / soft ivory / midnight scroll bar */}
       <div
-        className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#CCFF00] via-[#D9FF26] to-[#F15E21] transition-all duration-75 ease-out shadow-[0_0_12px_rgba(204,255,0,0.8)]"
+        className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#0B0A0F] via-[#88B300] to-[#CCFF00] dark:from-[#181622] dark:via-[#88B300] dark:to-[#CCFF00] transition-all duration-75 ease-out shadow-[0_0_12px_rgba(204,255,0,0.8)]"
         style={{ width: `${scrollProgress}%` }}
       >
         {/* Leading tip glow beacon */}
@@ -42,3 +42,4 @@ export const ScrollProgressBar: React.FC = () => {
     </div>
   );
 };
+

@@ -60,7 +60,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
               title="Return to Overview"
               className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-[#FBF9F4] dark:bg-[#181622] hover:bg-[#CCFF00] hover:text-[#0B0A0F] dark:hover:bg-[#CCFF00] dark:hover:text-[#0B0A0F] text-xs font-mono font-bold text-[#0B0A0F] dark:text-white transition-all shadow-midnight-sm"
             >
-              <LayoutGrid className="w-3.5 h-3.5 text-[#F15E21]" />
+              <LayoutGrid className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
               <span>Overview</span>
             </button>
           )}
@@ -68,11 +68,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           <div>
             <div className="flex items-center space-x-2">
               <span className="font-mono text-xs font-black text-[#0B0A0F] dark:text-[#CCFF00]">
-                CHAPTER {currentStep} / {totalSteps}
+                {currentStep <= 6 ? `SECTION ${activeStepMeta.code} OF 6` : 'CONCLUSION'}
               </span>
               <span className="text-slate-300 dark:text-slate-700">•</span>
               <span className="text-xs text-slate-500 font-mono font-medium">
-                {activeStepMeta.code === 'Conclusion' ? 'Celebration & Impact' : activeStepMeta.code === 'Review' ? 'Pre-Submission Audit' : `Section ${activeStepMeta.code}`}
+                {activeStepMeta.code === 'Conclusion' ? 'Celebration & Impact' : activeStepMeta.code === 'Review' ? 'Pre-Submission Audit' : activeStepMeta.title}
               </span>
             </div>
             <h2 className="font-display font-extrabold text-base sm:text-lg text-[#0B0A0F] dark:text-white leading-tight">
@@ -105,7 +105,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         aria-valuemax={100}
       >
         <div
-          className="h-full bg-gradient-to-r from-[#55348A] via-[#F15E21] to-[#CCFF00] rounded-full transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-lime-sm relative"
+          className="h-full bg-gradient-to-r from-[#0B0A0F] via-[#759900] to-[#CCFF00] rounded-full transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-lime-sm relative"
           style={{ width: `${progressPercent}%` }}
         />
       </div>

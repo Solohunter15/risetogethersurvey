@@ -63,7 +63,7 @@ export const RadioSingle: React.FC<RadioSingleProps> = ({
           {title && (
             <span className="block text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
               {title}
-              {required && <span className="text-[#F15E21] ml-1" title="Required">*</span>}
+              {required && <span className="text-[#0B0A0F] dark:text-[#CCFF00] font-black ml-1" title="Required">*</span>}
             </span>
           )}
           {instruction && (
@@ -167,11 +167,11 @@ export const RadioSingle: React.FC<RadioSingleProps> = ({
       {showOtherInput && (
         <div
           data-testid={`other-input-container-${id}`}
-          className="mt-3 p-3.5 rounded-xl bg-purple-50/40 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900/50 space-y-1.5 animate-fadeIn"
+          className="mt-3 p-3.5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622] border border-[#0B0A0F]/15 dark:border-white/10 space-y-1.5 animate-fadeIn"
         >
           <label
             htmlFor={`${id}-other-input`}
-            className="block text-xs font-semibold text-purple-900 dark:text-purple-300"
+            className="block text-xs font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-[#CCFF00]"
           >
             {selectedOption?.label.includes(':')
               ? selectedOption.label
@@ -186,7 +186,7 @@ export const RadioSingle: React.FC<RadioSingleProps> = ({
             placeholder={selectedOption?.otherPlaceholder || 'Type your details here...'}
             disabled={disabled}
             autoFocus
-            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#151320] text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
+            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#121118] text-sm text-[#0B0A0F] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#CCFF00] focus:border-[#0B0A0F] dark:focus:border-[#CCFF00] transition-colors"
           />
         </div>
       )}

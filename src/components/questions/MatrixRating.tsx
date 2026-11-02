@@ -53,7 +53,7 @@ export const MatrixRating: React.FC<MatrixRatingProps> = ({
             {title && (
               <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
                 {title}
-                {required && <span className="text-[#F15E21] ml-1" title="Required">*</span>}
+                {required && <span className="text-[#0B0A0F] dark:text-[#CCFF00] font-black ml-1" title="Required">*</span>}
               </h3>
             )}
             <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1 italic">
@@ -128,12 +128,12 @@ export const MatrixRating: React.FC<MatrixRatingProps> = ({
                       : idx % 2 === 0
                       ? 'bg-transparent'
                       : 'bg-slate-50/40 dark:bg-slate-800/20'
-                  } hover:bg-purple-50/30 dark:hover:bg-purple-950/20`}
+                  } hover:bg-[#CCFF00]/10 dark:hover:bg-[#CCFF00]/5`}
                 >
                   {/* Row Statement Text */}
                   <td className="py-4 px-4 text-sm text-slate-900 dark:text-slate-100 font-medium">
                     <div className="flex items-start space-x-2.5">
-                      <span className="w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center text-xs font-bold bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">
+                      <span className="w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center text-xs font-bold bg-[#CCFF00] text-[#0B0A0F]">
                         {row.code}
                       </span>
                       <span className="leading-snug">{row.statement}</span>
@@ -201,14 +201,14 @@ export const MatrixRating: React.FC<MatrixRatingProps> = ({
                 rowHasError
                   ? 'border-red-300 dark:border-red-800 bg-red-50/30 dark:bg-red-950/20'
                   : isRowAnswered
-                  ? 'border-purple-300 dark:border-purple-800/80 bg-white dark:bg-[#1A1826] shadow-xs'
-                  : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1A1826]'
+                  ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#181622] shadow-xs'
+                  : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-[#181622]'
               }`}
             >
               {/* Card Header: Statement */}
               <div className="flex items-start justify-between gap-2 mb-3">
                 <div className="flex items-start space-x-2.5">
-                  <span className="w-6 h-6 rounded-md flex-shrink-0 flex items-center justify-center text-xs font-bold bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">
+                  <span className="w-6 h-6 rounded-md flex-shrink-0 flex items-center justify-center text-xs font-bold bg-[#CCFF00] text-[#0B0A0F]">
                     {row.code}
                   </span>
                   <p className="text-sm font-semibold text-slate-900 dark:text-white leading-snug">
@@ -216,8 +216,8 @@ export const MatrixRating: React.FC<MatrixRatingProps> = ({
                   </p>
                 </div>
                 {isRowAnswered && (
-                  <span className="flex-shrink-0 text-emerald-600 dark:text-emerald-400" title="Answered">
-                    <Check className="w-4 h-4 stroke-[2.5]" />
+                  <span className="flex-shrink-0 text-[#0B0A0F] dark:text-[#CCFF00]" title="Answered">
+                    <Check className="w-4 h-4 stroke-[3]" />
                   </span>
                 )}
               </div>
@@ -240,7 +240,7 @@ export const MatrixRating: React.FC<MatrixRatingProps> = ({
                       } ${disabled ? 'opacity-40 cursor-not-allowed' : ''}`}
                     >
                       <span className="text-sm font-bold leading-none">{opt.value}</span>
-                      <span className={`text-[9px] mt-0.5 truncate max-w-full leading-tight ${isChecked ? 'text-purple-100' : 'text-slate-500 dark:text-slate-400'}`}>
+                      <span className={`text-[9px] mt-0.5 truncate max-w-full leading-tight ${isChecked ? 'text-[#CCFF00] dark:text-[#0B0A0F]' : 'text-slate-500 dark:text-slate-400'}`}>
                         {opt.value === '1' ? 'Dis.' : opt.value === '5' ? 'Agr.' : ''}
                       </span>
                       <input

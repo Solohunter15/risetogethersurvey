@@ -158,14 +158,14 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
       <div className="space-y-6">
 
         {/* SECTION A SUMMARY */}
-        <div data-testid="review-section-a" className="border border-slate-200 dark:border-purple-900/30 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-purple-300 dark:hover:border-purple-800 animate-fadeInUp stagger-1">
+        <div data-testid="review-section-a" className="border border-[#0B0A0F]/15 dark:border-white/10 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] animate-fadeInUp stagger-1">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">
-                <User className="w-5 h-5" />
+              <div className="p-2 rounded-xl bg-[#CCFF00] text-[#0B0A0F] font-black">
+                <User className="w-5 h-5 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-xs font-bold text-[#F15E21] dark:text-[#FF7A45] uppercase">Section A</span>
+                <span className="text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] uppercase font-mono">Section A</span>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">About You</h3>
               </div>
             </div>
@@ -173,7 +173,7 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
               type="button"
               onClick={() => goToStep(1)}
               data-testid="edit-section-a-btn"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg text-[#0B0A0F] bg-[#CCFF00] hover:bg-[#D9FF26] border border-[#0B0A0F]/20 transition cursor-pointer"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>Edit Section</span>
@@ -270,14 +270,14 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
         </div>
 
         {/* SECTION B SUMMARY */}
-        <div data-testid="review-section-b" className="border border-slate-200 dark:border-purple-900/30 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-purple-300 dark:hover:border-purple-800 animate-fadeInUp stagger-2">
+        <div data-testid="review-section-b" className="border border-[#0B0A0F]/15 dark:border-white/10 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] animate-fadeInUp stagger-2">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">
-                <BookOpen className="w-5 h-5" />
+              <div className="p-2 rounded-xl bg-[#CCFF00] text-[#0B0A0F] font-black">
+                <BookOpen className="w-5 h-5 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-xs font-bold text-[#F15E21] dark:text-[#FF7A45] uppercase">Section B</span>
+                <span className="text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] uppercase font-mono">Section B</span>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Academic Experience & Learning</h3>
               </div>
             </div>
@@ -285,7 +285,7 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
               type="button"
               onClick={() => goToStep(2)}
               data-testid="edit-section-b-btn"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg text-[#0B0A0F] bg-[#CCFF00] hover:bg-[#D9FF26] border border-[#0B0A0F]/20 transition cursor-pointer"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>Edit Section</span>
@@ -326,14 +326,14 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
         </div>
 
         {/* SECTION C SUMMARY */}
-        <div data-testid="review-section-c" className="border border-slate-200 dark:border-purple-900/30 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-purple-300 dark:hover:border-purple-800 animate-fadeInUp stagger-3">
+        <div data-testid="review-section-c" className="border border-[#0B0A0F]/15 dark:border-white/10 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] animate-fadeInUp stagger-3">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">
-                <Briefcase className="w-5 h-5" />
+              <div className="p-2 rounded-xl bg-[#CCFF00] text-[#0B0A0F] font-black">
+                <Briefcase className="w-5 h-5 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-xs font-bold text-[#F15E21] dark:text-[#FF7A45] uppercase">Section C</span>
+                <span className="text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] uppercase font-mono">Section C</span>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Internships & Career Readiness</h3>
               </div>
             </div>
@@ -341,7 +341,7 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
               type="button"
               onClick={() => goToStep(3)}
               data-testid="edit-section-c-btn"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg text-[#0B0A0F] bg-[#CCFF00] hover:bg-[#D9FF26] border border-[#0B0A0F]/20 transition cursor-pointer"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>Edit Section</span>
@@ -396,14 +396,14 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
         </div>
 
         {/* SECTION D SUMMARY */}
-        <div data-testid="review-section-d" className="border border-slate-200 dark:border-purple-900/30 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-purple-300 dark:hover:border-purple-800 animate-fadeInUp stagger-4">
+        <div data-testid="review-section-d" className="border border-[#0B0A0F]/15 dark:border-white/10 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] animate-fadeInUp stagger-4">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">
-                <Users className="w-5 h-5" />
+              <div className="p-2 rounded-xl bg-[#CCFF00] text-[#0B0A0F] font-black">
+                <Users className="w-5 h-5 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-xs font-bold text-[#F15E21] dark:text-[#FF7A45] uppercase">Section D</span>
+                <span className="text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] uppercase font-mono">Section D</span>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Student Communities</h3>
               </div>
             </div>
@@ -411,7 +411,7 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
               type="button"
               onClick={() => goToStep(4)}
               data-testid="edit-section-d-btn"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg text-[#0B0A0F] bg-[#CCFF00] hover:bg-[#D9FF26] border border-[#0B0A0F]/20 transition cursor-pointer"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>Edit Section</span>
@@ -445,14 +445,14 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
         </div>
 
         {/* SECTION E SUMMARY */}
-        <div data-testid="review-section-e" className="border border-slate-200 dark:border-purple-900/30 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-purple-300 dark:hover:border-purple-800 animate-fadeInUp stagger-5">
+        <div data-testid="review-section-e" className="border border-[#0B0A0F]/15 dark:border-white/10 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] animate-fadeInUp stagger-5">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">
-                <Building2 className="w-5 h-5" />
+              <div className="p-2 rounded-xl bg-[#CCFF00] text-[#0B0A0F] font-black">
+                <Building2 className="w-5 h-5 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-xs font-bold text-[#F15E21] dark:text-[#FF7A45] uppercase">Section E</span>
+                <span className="text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] uppercase font-mono">Section E</span>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Institutional Challenges & Opportunities</h3>
               </div>
             </div>
@@ -460,7 +460,7 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
               type="button"
               onClick={() => goToStep(5)}
               data-testid="edit-section-e-btn"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg text-[#0B0A0F] bg-[#CCFF00] hover:bg-[#D9FF26] border border-[#0B0A0F]/20 transition cursor-pointer"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>Edit Section</span>
@@ -494,14 +494,14 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
         </div>
 
         {/* SECTION F SUMMARY */}
-        <div data-testid="review-section-f" className="border border-slate-200 dark:border-purple-900/30 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-purple-300 dark:hover:border-purple-800 animate-fadeInUp stagger-6">
+        <div data-testid="review-section-f" className="border border-[#0B0A0F]/15 dark:border-white/10 rounded-2xl bg-white dark:bg-[#151320] p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] animate-fadeInUp stagger-6">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">
-                <Sparkles className="w-5 h-5" />
+              <div className="p-2 rounded-xl bg-[#CCFF00] text-[#0B0A0F] font-black">
+                <Sparkles className="w-5 h-5 stroke-[2.5]" />
               </div>
               <div>
-                <span className="text-xs font-bold text-[#F15E21] dark:text-[#FF7A45] uppercase">Section F</span>
+                <span className="text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] uppercase font-mono">Section F</span>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Student Voices & Solutions</h3>
               </div>
             </div>
@@ -509,7 +509,7 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
               type="button"
               onClick={() => goToStep(6)}
               data-testid="edit-section-f-btn"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg text-[#0B0A0F] bg-[#CCFF00] hover:bg-[#D9FF26] border border-[#0B0A0F]/20 transition cursor-pointer"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>Edit Section</span>
@@ -541,7 +541,7 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
       </div>
 
       {/* 3. Bottom Pre-Submission Action Controls */}
-      <div className="pt-6 border-t border-slate-200 dark:border-purple-900/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="pt-6 border-t border-[#0B0A0F]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
         <button
           type="button"
           onClick={() => (onBackToSurvey ? onBackToSurvey() : goToStep(6))}

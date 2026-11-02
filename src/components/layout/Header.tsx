@@ -12,7 +12,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   currentStep = 1,
-  totalSteps = 7,
   activeView = 'hero',
   onToggleView,
 }) => {
@@ -102,7 +101,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <span>Overview</span>
                     </button>
                     <span className="font-mono text-xs font-bold bg-[#CCFF00] text-[#0B0A0F] px-2.5 py-1 rounded-xl border border-[#0B0A0F]/20">
-                      Chapter {currentStep}/{totalSteps}
+                      {currentStep <= 6 ? `Section ${currentStep} of 6` : 'Conclusion'}
                     </span>
                   </div>
                 )}

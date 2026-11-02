@@ -203,11 +203,11 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
         <div className="max-w-2xl mx-auto rounded-3xl bg-white dark:bg-[#151320] border-2 border-[#0B0A0F] dark:border-[#CCFF00] p-6 sm:p-8 shadow-midnight-lg dark:shadow-lime-sm relative overflow-hidden card-3d">
           
           {/* Decorative Top Accent */}
-          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#55348A] via-[#F15E21] to-[#CCFF00]" />
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0B0A0F] via-[#759900] to-[#CCFF00]" />
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#0B0A0F]/10 dark:border-white/10">
             <div>
-              <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#F15E21]">
+              <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#0B0A0F] dark:text-[#CCFF00]">
                 OFFICIAL VERIFICATION RECEIPT
               </span>
               <h3 className="font-display font-bold text-xl text-[#0B0A0F] dark:text-white mt-0.5">
@@ -309,7 +309,7 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
       <section className="max-w-4xl mx-auto space-y-6 pt-4">
         
         <div className="text-center space-y-2">
-          <span className="font-mono text-xs uppercase tracking-widest text-[#55348A] dark:text-[#CCFF00] font-bold">
+          <span className="font-mono text-xs uppercase tracking-widest text-[#0B0A0F] dark:text-[#CCFF00] font-bold">
             [ WHAT HAPPENS NEXT // THE ROADMAP ]
           </span>
           <h2 className="font-display font-bold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white">
@@ -339,7 +339,7 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
 
           <ScrollReveal animation="fade-up" delay={120}>
             <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3 h-full">
-              <div className="w-10 h-10 rounded-xl bg-[#55348A] text-white flex items-center justify-center font-mono font-bold text-sm">
+              <div className="w-10 h-10 rounded-xl bg-[#0B0A0F] text-[#CCFF00] flex items-center justify-center font-mono font-bold text-sm">
                 02
               </div>
               <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
@@ -353,7 +353,7 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
 
           <ScrollReveal animation="fade-up" delay={180}>
             <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3 h-full">
-              <div className="w-10 h-10 rounded-xl bg-[#F15E21] text-white flex items-center justify-center font-mono font-bold text-sm">
+              <div className="w-10 h-10 rounded-xl bg-[#CCFF00] text-[#0B0A0F] flex items-center justify-center font-mono font-bold text-sm">
                 03
               </div>
               <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
@@ -401,7 +401,7 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
                 {showAnswerAudit ? 'Hide Submitted Responses' : 'Review All 6 Sections of Your Response'}
               </h4>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Inspect your submitted answers or make edits to any chapter
+                Inspect your submitted answers or make edits to any section
               </p>
             </div>
           </div>
@@ -473,11 +473,11 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
             {/* Section F Voices */}
             <div className="p-5 rounded-2xl bg-white dark:bg-[#151320] border border-slate-200 dark:border-slate-800 space-y-3 text-xs sm:text-sm">
               <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
-                <span className="font-bold font-mono text-[#F15E21] uppercase">Section F: Your Voice & Proposal</span>
+                <span className="font-bold font-mono text-[#0B0A0F] dark:text-[#CCFF00] uppercase">Section F: Your Voice & Proposal</span>
                 <button
                   type="button"
                   onClick={() => onEditSection(6)}
-                  className="inline-flex items-center space-x-1 text-xs font-bold text-purple-700 dark:text-[#CCFF00] hover:underline"
+                  className="inline-flex items-center space-x-1 text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] hover:underline cursor-pointer"
                 >
                   <Edit3 className="w-3.5 h-3.5" />
                   <span>Edit</span>

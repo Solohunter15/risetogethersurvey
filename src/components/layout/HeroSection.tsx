@@ -138,9 +138,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <button
             type="button"
             onClick={() => setShowInstructions(!showInstructions)}
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-4 rounded-2xl bg-white dark:bg-[#181622] text-[#0B0A0F] dark:text-white hover:bg-[#F5F2E9] dark:hover:bg-[#201D2E] font-bold text-xs uppercase tracking-wider border border-[#0B0A0F]/15 dark:border-white/10 transition-all shadow-midnight-sm hover:-translate-y-0.5"
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-4 rounded-2xl bg-white dark:bg-[#181622] text-[#0B0A0F] dark:text-white hover:bg-[#F5F2E9] dark:hover:bg-[#201D2E] font-bold text-xs uppercase tracking-wider border border-[#0B0A0F]/15 dark:border-white/10 transition-all shadow-midnight-sm hover:-translate-y-0.5 cursor-pointer"
           >
-            <HelpCircle className="w-4 h-4 text-[#F15E21]" />
+            <HelpCircle className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00]" />
             <span>{showInstructions ? 'Hide Instructions' : 'View Instructions'}</span>
             {showInstructions ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
@@ -153,7 +153,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <span>6 Survey Sections</span>
           </span>
           <span className="flex items-center space-x-1.5">
-            <Clock className="w-3.5 h-3.5 text-[#F15E21]" />
+            <Clock className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
             <span>~5–7 Minutes</span>
           </span>
           <span className="flex items-center space-x-1.5">
@@ -166,7 +166,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {showInstructions && (
           <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/15 dark:border-[#CCFF00]/40 text-left animate-slideInDown space-y-3 shadow-glass dark:shadow-glass-dark max-w-2xl mx-auto">
             <div className="flex items-center space-x-2 font-display font-bold text-xs uppercase tracking-wider text-[#0B0A0F] dark:text-[#CCFF00]">
-              <Sparkles className="w-4 h-4 text-[#F15E21]" />
+              <Sparkles className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00]" />
               <span>Instructions for Respondents</span>
             </div>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-700 dark:text-slate-300">
@@ -187,8 +187,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <section className="max-w-4xl mx-auto space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-[#0B0A0F]/15 dark:border-white/15">
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-[#55348A] dark:text-[#CCFF00] font-bold flex items-center space-x-1.5">
-                <Flame className="w-3.5 h-3.5 text-[#F15E21] animate-bounceSubtle" />
+              <span className="font-mono text-xs uppercase tracking-widest text-[#0B0A0F] dark:text-[#CCFF00] font-bold flex items-center space-x-1.5">
+                <Flame className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00] animate-bounceSubtle" />
                 <span>[ THE INQUIRY // DIRECT FROM STUDENTS ]</span>
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white mt-1">
@@ -219,7 +219,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       }`}>
                         {q.num}
                       </span>
-                      <h4 className="font-display font-bold text-base sm:text-lg text-[#0B0A0F] dark:text-white leading-snug group-hover:text-[#F15E21] dark:group-hover:text-[#CCFF00] transition-colors">
+                      <h4 className="font-display font-bold text-base sm:text-lg text-[#0B0A0F] dark:text-white leading-snug group-hover:text-[#0B0A0F] dark:group-hover:text-[#CCFF00] transition-colors">
                         {q.title}
                       </h4>
                     </div>
@@ -234,17 +234,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </section>
       </ScrollReveal>
 
-      {/* 3. FLUID CHAPTER TIMELINE (ACCESSIBLE & MODERN) */}
+      {/* 3. FLUID SECTION TIMELINE (ACCESSIBLE & MODERN) */}
       <ScrollReveal animation="fade-up" delay={100}>
         <section className="max-w-4xl mx-auto space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-[#0B0A0F]/15 dark:border-white/15">
             <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-[#F15E21] font-bold flex items-center space-x-1.5">
+              <span className="font-mono text-xs uppercase tracking-widest text-[#0B0A0F] dark:text-[#CCFF00] font-bold flex items-center space-x-1.5">
                 <Layers className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
-                <span>[ SURVEY TIMELINE // 6 CHAPTERS ]</span>
+                <span>[ SURVEY STRUCTURE // 6 SECTIONS ]</span>
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white mt-1">
-                Survey Structure & Jump-In
+                Survey Sections & Jump-In
               </h3>
             </div>
             <span className="text-xs font-mono text-slate-500">
@@ -252,7 +252,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </span>
           </div>
 
-          {/* Clean Open Chapter Rows */}
+          {/* Clean Open Section Rows */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             {sectionsList.map((sec, idx) => {
               const Icon = sec.icon;
@@ -268,7 +268,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   >
                     <div className="flex items-center space-x-4">
                       <div className="w-10 h-10 rounded-xl bg-[#FBF9F4] dark:bg-[#201D2E] border border-[#0B0A0F]/10 dark:border-white/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:border-[#CCFF00] transition-all">
-                        <Icon className="w-5 h-5 text-slate-600 dark:text-slate-300 group-hover:text-[#F15E21] dark:group-hover:text-[#CCFF00] transition-colors" />
+                        <Icon className="w-5 h-5 text-slate-600 dark:text-slate-300 group-hover:text-[#0B0A0F] dark:group-hover:text-[#CCFF00] transition-colors" />
                       </div>
                       <div>
                         <div className="flex items-center space-x-2">
@@ -279,7 +279,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                             {sec.qCount} Questions
                           </span>
                         </div>
-                        <h4 className="font-display font-bold text-sm sm:text-base text-[#0B0A0F] dark:text-white mt-0.5 group-hover:text-[#F15E21] dark:group-hover:text-[#CCFF00] transition-colors">
+                        <h4 className="font-display font-bold text-sm sm:text-base text-[#0B0A0F] dark:text-white mt-0.5 group-hover:text-[#0B0A0F] dark:group-hover:text-[#CCFF00] transition-colors">
                           {sec.title}
                         </h4>
                         <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">

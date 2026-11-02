@@ -149,18 +149,18 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = ({
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           disabled={disabled}
-          className={`w-full min-h-[48px] px-4 py-3 flex items-center justify-between rounded-xl border text-left text-sm sm:text-base font-medium transition-all focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+          className={`w-full min-h-[48px] px-4 py-3 flex items-center justify-between rounded-2xl border text-left text-sm sm:text-base font-medium transition-all focus:outline-none focus:ring-2 focus:ring-[#CCFF00] ${
             isOpen
-              ? 'border-purple-600 ring-2 ring-purple-500/20 bg-white dark:bg-[#1E1C2C]'
-              : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1A1826] hover:border-purple-300 dark:hover:border-purple-700'
+              ? 'border-[#0B0A0F] dark:border-[#CCFF00] ring-2 ring-[#CCFF00]/40 bg-white dark:bg-[#181622] shadow-midnight-sm'
+              : 'border-[#0B0A0F]/15 dark:border-white/10 bg-white dark:bg-[#181622] hover:border-[#0B0A0F] dark:hover:border-[#CCFF00]'
           } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
-          <span className={selectedOption ? 'text-slate-900 dark:text-white font-semibold' : 'text-slate-400'}>
+          <span className={selectedOption ? 'text-[#0B0A0F] dark:text-white font-semibold' : 'text-slate-400'}>
             {selectedOption ? selectedOption.label : placeholder}
           </span>
           <ChevronDown
             className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-              isOpen ? 'transform rotate-180 text-purple-600' : ''
+              isOpen ? 'transform rotate-180 text-[#0B0A0F] dark:text-[#CCFF00]' : ''
             }`}
           />
         </button>
@@ -169,11 +169,11 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = ({
         {isOpen && (
           <div
             data-testid={`dropdown-menu-${id}`}
-            className="absolute z-30 mt-2 w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1A1826] shadow-xl overflow-hidden animate-slideInDown"
+            className="absolute z-30 mt-2 w-full rounded-2xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#181622] shadow-xl overflow-hidden animate-slideInDown"
           >
             {/* Search Filter Input (When > 5 options) */}
             {options.length > 5 && (
-              <div className="p-2.5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-[#151320]">
+              <div className="p-2.5 border-b border-[#0B0A0F]/10 dark:border-white/10 bg-[#FBF9F4] dark:bg-[#14121B]">
                 <div className="relative">
                   <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
                   <input
@@ -182,7 +182,7 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = ({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search options..."
-                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1A1826] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-purple-500"
+                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#181622] text-[#0B0A0F] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
                   />
                 </div>
               </div>
@@ -209,15 +209,15 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = ({
                       onMouseEnter={() => setHighlightedIndex(index)}
                       className={`min-h-[44px] flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium cursor-pointer transition-colors ${
                         isSelected
-                          ? 'bg-purple-100/70 dark:bg-purple-950/60 text-purple-900 dark:text-purple-200 font-semibold'
+                          ? 'bg-[#CCFF00]/25 dark:bg-[#CCFF00]/15 text-[#0B0A0F] dark:text-[#CCFF00] font-bold border border-[#CCFF00]/40'
                           : isHighlighted
-                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
-                          : 'text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                          ? 'bg-[#F5F2E9] dark:bg-white/5 text-[#0B0A0F] dark:text-white'
+                          : 'text-[#0B0A0F] dark:text-slate-200 hover:bg-[#F5F2E9] dark:hover:bg-white/5'
                       }`}
                     >
                       <span className="leading-snug">{opt.label}</span>
                       {isSelected && (
-                        <Check className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00] animate-checkPop flex-shrink-0 ml-2" />
+                        <Check className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00] animate-checkPop flex-shrink-0 ml-2 stroke-[2.5]" />
                       )}
                     </li>
                   );
@@ -236,11 +236,11 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = ({
       {showOtherInput && (
         <div
           data-testid={`other-input-container-${id}`}
-          className="mt-3 p-3.5 rounded-xl bg-purple-50/40 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900/50 space-y-1.5 animate-popIn"
+          className="mt-3 p-3.5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622] border border-[#0B0A0F]/15 dark:border-white/10 space-y-1.5 animate-popIn"
         >
           <label
             htmlFor={`${id}-other-input`}
-            className="block text-xs font-semibold text-purple-900 dark:text-purple-300"
+            className="block text-xs font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-[#CCFF00]"
           >
             {selectedOption?.label.includes(':') ? selectedOption.label : 'Please specify:'}
           </label>
@@ -253,7 +253,7 @@ export const DropdownSelect: React.FC<DropdownSelectProps> = ({
             placeholder={selectedOption?.otherPlaceholder || 'Please describe...'}
             disabled={disabled}
             autoFocus
-            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#151320] text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
+            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-white dark:bg-[#121118] text-sm text-[#0B0A0F] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#CCFF00] focus:border-[#0B0A0F] dark:focus:border-[#CCFF00] transition-colors"
           />
         </div>
       )}
