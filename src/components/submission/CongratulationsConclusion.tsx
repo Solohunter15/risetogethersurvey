@@ -35,6 +35,7 @@ import {
 import {
   SURVEY_QUESTIONS,
 } from '../../data/surveyContent';
+import { ScrollReveal } from '../common/ScrollReveal';
 
 interface CongratulationsConclusionProps {
   onReturnToHome: () => void;
@@ -198,107 +199,109 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
       {/* =================================================================== */}
       {/* 2. OFFICIAL DIGITAL CONTRIBUTOR CREDENTIAL CARD                     */}
       {/* =================================================================== */}
-      <div className="max-w-2xl mx-auto rounded-3xl bg-white dark:bg-[#151320] border-2 border-[#0B0A0F] dark:border-[#CCFF00] p-6 sm:p-8 shadow-midnight-lg dark:shadow-lime-sm animate-fadeInUp flow-delay-1 relative overflow-hidden">
-        
-        {/* Decorative Top Accent */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#55348A] via-[#F15E21] to-[#CCFF00]" />
+      <ScrollReveal animation="fade-up" delay={80}>
+        <div className="max-w-2xl mx-auto rounded-3xl bg-white dark:bg-[#151320] border-2 border-[#0B0A0F] dark:border-[#CCFF00] p-6 sm:p-8 shadow-midnight-lg dark:shadow-lime-sm relative overflow-hidden card-3d">
+          
+          {/* Decorative Top Accent */}
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#55348A] via-[#F15E21] to-[#CCFF00]" />
 
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#0B0A0F]/10 dark:border-white/10">
-          <div>
-            <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#F15E21]">
-              OFFICIAL VERIFICATION RECEIPT
-            </span>
-            <h3 className="font-display font-bold text-xl text-[#0B0A0F] dark:text-white mt-0.5">
-              Verified Student Contributor
-            </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#0B0A0F]/10 dark:border-white/10">
+            <div>
+              <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#F15E21]">
+                OFFICIAL VERIFICATION RECEIPT
+              </span>
+              <h3 className="font-display font-bold text-xl text-[#0B0A0F] dark:text-white mt-0.5">
+                Verified Student Contributor
+              </h3>
+            </div>
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-bold font-mono">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>100% Anonymous</span>
+            </div>
           </div>
-          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-bold font-mono">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>100% Anonymous</span>
+
+          {/* Credential Data Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-5 text-xs sm:text-sm font-mono">
+            <div>
+              <span className="text-slate-400 block text-[11px] uppercase">Submission ID</span>
+              <span className="font-bold text-[#0B0A0F] dark:text-[#CCFF00] text-base tracking-wider">
+                {submissionId}
+              </span>
+            </div>
+            <div>
+              <span className="text-slate-400 block text-[11px] uppercase">Timestamp</span>
+              <span className="font-semibold text-slate-800 dark:text-slate-200">
+                {submittedAt}
+              </span>
+            </div>
+            <div>
+              <span className="text-slate-400 block text-[11px] uppercase">Initiative</span>
+              <span className="font-semibold text-slate-800 dark:text-slate-200 font-sans">
+                Beyond Syllabus • Rise Together 2026
+              </span>
+            </div>
+            <div>
+              <span className="text-slate-400 block text-[11px] uppercase">Scope</span>
+              <span className="font-semibold text-slate-800 dark:text-slate-200 font-sans">
+                Kerala Statewide Transformation
+              </span>
+            </div>
           </div>
+
+          {/* Credential Quick Actions */}
+          <div className="pt-4 border-t border-[#0B0A0F]/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={handleCopySummary}
+                className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#0B0A0F]/5 dark:bg-white/10 hover:bg-[#CCFF00] hover:text-[#0B0A0F] text-[#0B0A0F] dark:text-white text-xs font-bold transition-all cursor-pointer"
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copied ? 'Summary Copied!' : 'Copy Summary'}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => exportToJson(responses)}
+                className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#0B0A0F]/5 dark:bg-white/10 hover:bg-[#CCFF00] hover:text-[#0B0A0F] text-[#0B0A0F] dark:text-white text-xs font-bold transition-all cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5 text-purple-600" />
+                <span>JSON</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => exportToCsv(responses)}
+                className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#0B0A0F]/5 dark:bg-white/10 hover:bg-[#CCFF00] hover:text-[#0B0A0F] text-[#0B0A0F] dark:text-white text-xs font-bold transition-all cursor-pointer"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#F15E21]" />
+                <span>CSV</span>
+              </button>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <span className="text-xs font-mono text-slate-400">Share:</span>
+              <a
+                href={shareLinks.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold transition-transform hover:scale-105"
+                title="Share to WhatsApp"
+              >
+                WhatsApp
+              </a>
+              <a
+                href={shareLinks.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold transition-transform hover:scale-105"
+                title="Share to Telegram"
+              >
+                Telegram
+              </a>
+            </div>
+          </div>
+
         </div>
-
-        {/* Credential Data Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-5 text-xs sm:text-sm font-mono">
-          <div>
-            <span className="text-slate-400 block text-[11px] uppercase">Submission ID</span>
-            <span className="font-bold text-[#0B0A0F] dark:text-[#CCFF00] text-base tracking-wider">
-              {submissionId}
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-[11px] uppercase">Timestamp</span>
-            <span className="font-semibold text-slate-800 dark:text-slate-200">
-              {submittedAt}
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-[11px] uppercase">Initiative</span>
-            <span className="font-semibold text-slate-800 dark:text-slate-200 font-sans">
-              Beyond Syllabus • Rise Together 2026
-            </span>
-          </div>
-          <div>
-            <span className="text-slate-400 block text-[11px] uppercase">Scope</span>
-            <span className="font-semibold text-slate-800 dark:text-slate-200 font-sans">
-              Kerala Statewide Transformation
-            </span>
-          </div>
-        </div>
-
-        {/* Credential Quick Actions */}
-        <div className="pt-4 border-t border-[#0B0A0F]/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={handleCopySummary}
-              className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#0B0A0F]/5 dark:bg-white/10 hover:bg-[#CCFF00] hover:text-[#0B0A0F] text-[#0B0A0F] dark:text-white text-xs font-bold transition-all"
-            >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Summary Copied!' : 'Copy Summary'}</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => exportToJson(responses)}
-              className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#0B0A0F]/5 dark:bg-white/10 hover:bg-[#CCFF00] hover:text-[#0B0A0F] text-[#0B0A0F] dark:text-white text-xs font-bold transition-all"
-            >
-              <Download className="w-3.5 h-3.5 text-purple-600" />
-              <span>JSON</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => exportToCsv(responses)}
-              className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#0B0A0F]/5 dark:bg-white/10 hover:bg-[#CCFF00] hover:text-[#0B0A0F] text-[#0B0A0F] dark:text-white text-xs font-bold transition-all"
-            >
-              <FileText className="w-3.5 h-3.5 text-[#F15E21]" />
-              <span>CSV</span>
-            </button>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <span className="text-xs font-mono text-slate-400">Share:</span>
-            <a
-              href={shareLinks.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold transition-transform hover:scale-105"
-              title="Share to WhatsApp"
-            >
-              WhatsApp
-            </a>
-            <a
-              href={shareLinks.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold transition-transform hover:scale-105"
-              title="Share to Telegram"
-            >
-              Telegram
-            </a>
-          </div>
-        </div>
-
-      </div>
+      </ScrollReveal>
 
       {/* =================================================================== */}
       {/* 3. CREATIVE CONCLUSION: "THE JOURNEY OF YOUR VOICE"                 */}
@@ -320,53 +323,61 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
         {/* 4-Phase Storyline Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           
-          <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#CCFF00] text-[#0B0A0F] flex items-center justify-center font-mono font-bold text-sm">
-              01
+          <ScrollReveal animation="fade-up" delay={60}>
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3 h-full">
+              <div className="w-10 h-10 rounded-xl bg-[#CCFF00] text-[#0B0A0F] flex items-center justify-center font-mono font-bold text-sm">
+                01
+              </div>
+              <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
+                Anonymized Synthesis
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Your responses are aggregated across KTU, MGU, Kerala, Calicut, CUSAT, and KUHS into an open statistical report highlighting systemic friction points.
+              </p>
             </div>
-            <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
-              Anonymized Synthesis
-            </h4>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Your responses are aggregated across KTU, MGU, Kerala, Calicut, CUSAT, and KUHS into an open statistical report highlighting systemic friction points.
-            </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#55348A] text-white flex items-center justify-center font-mono font-bold text-sm">
-              02
+          <ScrollReveal animation="fade-up" delay={120}>
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3 h-full">
+              <div className="w-10 h-10 rounded-xl bg-[#55348A] text-white flex items-center justify-center font-mono font-bold text-sm">
+                02
+              </div>
+              <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
+                Student Community Working Groups
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Partnering with μLearn, TinkerHub, FOSS, IEDC, and AWS Clubs to transform recommendations into collaborative student-run bootcamps and projects.
+              </p>
             </div>
-            <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
-              Student Community Working Groups
-            </h4>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Partnering with μLearn, TinkerHub, FOSS, IEDC, and AWS Clubs to transform recommendations into collaborative student-run bootcamps and projects.
-            </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#F15E21] text-white flex items-center justify-center font-mono font-bold text-sm">
-              03
+          <ScrollReveal animation="fade-up" delay={180}>
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3 h-full">
+              <div className="w-10 h-10 rounded-xl bg-[#F15E21] text-white flex items-center justify-center font-mono font-bold text-sm">
+                03
+              </div>
+              <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
+                Direct University Board Briefings
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Delivering data-backed evidence directly to Vice Chancellors, Syndicate members, and the Higher Education Department to advocate for curriculum reform.
+              </p>
             </div>
-            <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
-              Direct University Board Briefings
-            </h4>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Delivering data-backed evidence directly to Vice Chancellors, Syndicate members, and the Higher Education Department to advocate for curriculum reform.
-            </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0B0A0F] text-[#CCFF00] flex items-center justify-center font-mono font-bold text-sm">
-              04
+          <ScrollReveal animation="fade-up" delay={240}>
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all hover:-translate-y-1 shadow-xs space-y-3 h-full">
+              <div className="w-10 h-10 rounded-xl bg-[#0B0A0F] text-[#CCFF00] flex items-center justify-center font-mono font-bold text-sm">
+                04
+              </div>
+              <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
+                Paid Internship & Mentorship Access
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Connecting industry partners and tech ecosystems directly with tier-2/3 college students to eliminate geographic internship barriers.
+              </p>
             </div>
-            <h4 className="font-display font-bold text-base text-[#0B0A0F] dark:text-white">
-              Paid Internship & Mentorship Access
-            </h4>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Connecting industry partners and tech ecosystems directly with tier-2/3 college students to eliminate geographic internship barriers.
-            </p>
-          </div>
+          </ScrollReveal>
 
         </div>
 

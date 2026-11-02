@@ -13,8 +13,11 @@ import {
   Compass,
   ChevronDown,
   ChevronUp,
-  Sparkles
+  Sparkles,
+  Flame,
+  Layers
 } from 'lucide-react';
+import { ScrollReveal } from '../common/ScrollReveal';
 
 interface HeroSectionProps {
   onStartSurvey: () => void;
@@ -89,24 +92,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Soft atmospheric background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#CCFF00]/10 dark:bg-[#CCFF00]/5 blur-3xl pointer-events-none -z-10" />
 
-        {/* UNCONSTRAINED, HIGH-RESOLUTION BRAND LOGO */}
-        <div className="w-full flex justify-center py-2 animate-popIn">
-          <img
-            src="/logo-clean.png"
-            alt="Rise Together 2026"
-            className="h-24 sm:h-32 md:h-40 w-auto max-w-full object-contain dark:hidden drop-shadow-sm hover:scale-105 transition-transform duration-300"
-          />
-          <img
-            src="/logo-clean-dark.png"
-            alt="Rise Together 2026"
-            className="h-24 sm:h-32 md:h-40 w-auto max-w-full object-contain hidden dark:block drop-shadow-[0_0_30px_rgba(204,255,0,0.25)] hover:scale-105 transition-transform duration-300"
-          />
+        {/* UNCONSTRAINED, HIGH-RESOLUTION BRAND LOGO WITH 3D HOVER */}
+        <div className="w-full flex justify-center py-2 animate-popIn perspective-1000">
+          <div className="card-3d inline-block cursor-pointer">
+            <img
+              src="/logo-clean.png"
+              alt="Rise Together 2026"
+              className="h-24 sm:h-32 md:h-40 w-auto max-w-full object-contain dark:hidden drop-shadow-sm transition-transform duration-500 ease-out hover:scale-105"
+            />
+            <img
+              src="/logo-clean-dark.png"
+              alt="Rise Together 2026"
+              className="h-24 sm:h-32 md:h-40 w-auto max-w-full object-contain hidden dark:block drop-shadow-[0_0_35px_rgba(204,255,0,0.3)] transition-transform duration-500 ease-out hover:scale-105"
+            />
+          </div>
         </div>
 
-        {/* Headline & Description with Open Air */}
+        {/* Headline & Description with Open Air & Shimmer */}
         <div className="space-y-4 max-w-3xl mx-auto animate-fadeInUp flow-delay-1">
           <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[50px] leading-[1.12] text-[#0B0A0F] dark:text-white tracking-tight">
-            Kerala Student Experience & Higher Education Transformation Survey
+            <span className="shimmer-text">Kerala Student Experience</span> & Higher Education Transformation Survey
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-medium leading-relaxed max-w-2xl mx-auto">
@@ -178,136 +183,146 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </section>
 
       {/* 2. OPEN EDITORIAL INQUIRY INDEX (NOT BOXED CARDS) */}
-      <section className="max-w-4xl mx-auto space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-[#0B0A0F]/15 dark:border-white/15">
-          <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#55348A] dark:text-[#CCFF00] font-bold">
-              [ THE INQUIRY // DIRECT FROM STUDENTS ]
+      <ScrollReveal animation="fade-up" delay={50}>
+        <section className="max-w-4xl mx-auto space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-[#0B0A0F]/15 dark:border-white/15">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-widest text-[#55348A] dark:text-[#CCFF00] font-bold flex items-center space-x-1.5">
+                <Flame className="w-3.5 h-3.5 text-[#F15E21] animate-bounceSubtle" />
+                <span>[ THE INQUIRY // DIRECT FROM STUDENTS ]</span>
+              </span>
+              <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white mt-1">
+                Six Questions We Bring to the Table
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Hover to explore themes
             </span>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white mt-1">
-              Six Questions We Bring to the Table
-            </h3>
           </div>
-          <span className="text-xs font-mono text-slate-500">
-            Hover to explore themes
-          </span>
-        </div>
 
-        {/* Open-Air Editorial List */}
-        <div className="divide-y divide-[#0B0A0F]/10 dark:divide-white/10">
-          {coreQuestions.map((q, idx) => {
-            const isHovered = hoveredInquiry === idx;
-            return (
-              <div
-                key={q.num}
-                onMouseEnter={() => setHoveredInquiry(idx)}
-                onMouseLeave={() => setHoveredInquiry(null)}
-                className={`py-5 sm:py-6 transition-all duration-200 cursor-pointer flex flex-col md:flex-row md:items-baseline justify-between gap-4 px-2 sm:px-4 rounded-xl animate-fadeInUp stagger-${idx + 1} ${
-                  isHovered ? 'bg-white/60 dark:bg-white/5 pl-4 sm:pl-6 shadow-xs' : ''
-                }`}
-              >
-                <div className="flex items-baseline space-x-4">
-                  <span className={`font-mono text-sm sm:text-base font-black transition-colors ${
-                    isHovered ? 'text-[#0B0A0F] dark:text-[#CCFF00]' : 'text-slate-400'
-                  }`}>
-                    {q.num}
-                  </span>
-                  <h4 className="font-display font-bold text-base sm:text-lg text-[#0B0A0F] dark:text-white leading-snug">
-                    {q.title}
-                  </h4>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 md:max-w-md leading-relaxed pl-8 md:pl-0">
-                  {q.desc}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 3. FLUID CHAPTER TIMELINE (ACCESSIBLE & MODERN) */}
-      <section className="max-w-4xl mx-auto space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-[#0B0A0F]/15 dark:border-white/15">
-          <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#F15E21] font-bold">
-              [ SURVEY TIMELINE // 6 CHAPTERS ]
-            </span>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white mt-1">
-              Survey Structure & Jump-In
-            </h3>
-          </div>
-          <span className="text-xs font-mono text-slate-500">
-            Select any section to enter
-          </span>
-        </div>
-
-        {/* Clean Open Chapter Rows */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-          {sectionsList.map((sec, idx) => {
-            const Icon = sec.icon;
-            return (
-              <button
-                key={sec.code}
-                type="button"
-                onClick={() => {
-                  if (onSelectSection) onSelectSection(idx + 1);
-                  else onStartSurvey();
-                }}
-                className={`p-5 rounded-2xl bg-white/70 dark:bg-[#181622]/70 hover:bg-white dark:hover:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] text-left transition-all duration-200 shadow-xs hover:shadow-midnight-sm hover:-translate-y-1 flex items-center justify-between group animate-fadeInUp stagger-${idx + 1}`}
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#FBF9F4] dark:bg-[#201D2E] border border-[#0B0A0F]/10 dark:border-white/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <Icon className="w-5 h-5 text-slate-600 dark:text-slate-300 group-hover:text-[#F15E21] transition-colors" />
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="font-mono text-[10px] font-black text-[#0B0A0F] bg-[#CCFF00] px-1.5 py-0.2 rounded">
-                        SEC {sec.code}
+          {/* Open-Air Editorial List */}
+          <div className="divide-y divide-[#0B0A0F]/10 dark:divide-white/10">
+            {coreQuestions.map((q, idx) => {
+              const isHovered = hoveredInquiry === idx;
+              return (
+                <ScrollReveal key={q.num} animation="fade-up" delay={idx * 60}>
+                  <div
+                    onMouseEnter={() => setHoveredInquiry(idx)}
+                    onMouseLeave={() => setHoveredInquiry(null)}
+                    className={`py-5 sm:py-6 transition-all duration-300 cursor-pointer flex flex-col md:flex-row md:items-baseline justify-between gap-4 px-2 sm:px-4 rounded-xl group ${
+                      isHovered ? 'bg-white/70 dark:bg-white/5 pl-4 sm:pl-6 shadow-sm translate-x-1' : ''
+                    }`}
+                  >
+                    <div className="flex items-baseline space-x-4">
+                      <span className={`font-mono text-sm sm:text-base font-black transition-colors ${
+                        isHovered ? 'text-[#0B0A0F] dark:text-[#CCFF00]' : 'text-slate-400'
+                      }`}>
+                        {q.num}
                       </span>
-                      <span className="font-mono text-[10px] text-slate-400">
-                        {sec.qCount} Questions
-                      </span>
+                      <h4 className="font-display font-bold text-base sm:text-lg text-[#0B0A0F] dark:text-white leading-snug group-hover:text-[#F15E21] dark:group-hover:text-[#CCFF00] transition-colors">
+                        {q.title}
+                      </h4>
                     </div>
-                    <h4 className="font-display font-bold text-sm sm:text-base text-[#0B0A0F] dark:text-white mt-0.5">
-                      {sec.title}
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
-                      {sec.desc}
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 md:max-w-md leading-relaxed pl-8 md:pl-0">
+                      {q.desc}
                     </p>
                   </div>
-                </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      </ScrollReveal>
 
-                <div className="flex-shrink-0 pl-3">
-                  <span className="font-mono text-xs font-bold text-slate-400 group-hover:text-[#0B0A0F] dark:group-hover:text-[#CCFF00] group-hover:translate-x-1 transition-all inline-block">
-                    →
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </section>
+      {/* 3. FLUID CHAPTER TIMELINE (ACCESSIBLE & MODERN) */}
+      <ScrollReveal animation="fade-up" delay={100}>
+        <section className="max-w-4xl mx-auto space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-[#0B0A0F]/15 dark:border-white/15">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-widest text-[#F15E21] font-bold flex items-center space-x-1.5">
+                <Layers className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
+                <span>[ SURVEY TIMELINE // 6 CHAPTERS ]</span>
+              </span>
+              <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white mt-1">
+                Survey Structure & Jump-In
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Select any section to enter
+            </span>
+          </div>
+
+          {/* Clean Open Chapter Rows */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            {sectionsList.map((sec, idx) => {
+              const Icon = sec.icon;
+              return (
+                <ScrollReveal key={sec.code} animation="fade-up" delay={idx * 70}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onSelectSection) onSelectSection(idx + 1);
+                      else onStartSurvey();
+                    }}
+                    className="w-full p-5 rounded-2xl bg-white/70 dark:bg-[#181622]/70 hover:bg-white dark:hover:bg-[#181622] border border-[#0B0A0F]/10 dark:border-white/10 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] text-left transition-all duration-300 shadow-xs hover:shadow-midnight-sm hover:-translate-y-1.5 flex items-center justify-between group active:scale-[0.99] cursor-pointer"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#FBF9F4] dark:bg-[#201D2E] border border-[#0B0A0F]/10 dark:border-white/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:border-[#CCFF00] transition-all">
+                        <Icon className="w-5 h-5 text-slate-600 dark:text-slate-300 group-hover:text-[#F15E21] dark:group-hover:text-[#CCFF00] transition-colors" />
+                      </div>
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono text-[10px] font-black text-[#0B0A0F] bg-[#CCFF00] px-1.5 py-0.2 rounded">
+                            SEC {sec.code}
+                          </span>
+                          <span className="font-mono text-[10px] text-slate-400">
+                            {sec.qCount} Questions
+                          </span>
+                        </div>
+                        <h4 className="font-display font-bold text-sm sm:text-base text-[#0B0A0F] dark:text-white mt-0.5 group-hover:text-[#F15E21] dark:group-hover:text-[#CCFF00] transition-colors">
+                          {sec.title}
+                        </h4>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                          {sec.desc}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex-shrink-0 pl-3">
+                      <span className="font-mono text-xs font-bold text-slate-400 group-hover:text-[#0B0A0F] dark:group-hover:text-[#CCFF00] group-hover:translate-x-1.5 transition-transform duration-200 inline-block">
+                        →
+                      </span>
+                    </div>
+                  </button>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </section>
+      </ScrollReveal>
 
       {/* 4. LIGHT-MODE COMPLIANT CLOSING CALL TO ACTION */}
-      <div className="max-w-4xl mx-auto p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#14121B] text-[#0B0A0F] dark:text-[#FBF9F4] border border-[#0B0A0F]/15 dark:border-[#CCFF00]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-glass dark:shadow-glass-dark animate-popIn">
-        <div className="space-y-1.5 text-center sm:text-left">
-          <h4 className="font-display font-extrabold text-xl sm:text-2xl text-[#0B0A0F] dark:text-white">
-            Ready to shape higher education in Kerala?
-          </h4>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md">
-            From identifying challenges to building solutions. From individual potential to collective progress.
-          </p>
-        </div>
+      <ScrollReveal animation="scale" delay={150}>
+        <div className="max-w-4xl mx-auto p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#14121B] text-[#0B0A0F] dark:text-[#FBF9F4] border border-[#0B0A0F]/15 dark:border-[#CCFF00]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-glass dark:shadow-glass-dark hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] transition-all">
+          <div className="space-y-1.5 text-center sm:text-left">
+            <h4 className="font-display font-extrabold text-xl sm:text-2xl text-[#0B0A0F] dark:text-white">
+              Ready to shape higher education in Kerala?
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md">
+              From identifying challenges to building solutions. From individual potential to collective progress.
+            </p>
+          </div>
 
-        <button
-          type="button"
-          onClick={onStartSurvey}
-          className="btn-neon px-9 py-4 rounded-2xl font-black text-sm uppercase tracking-wider inline-flex items-center space-x-2 flex-shrink-0 group shadow-lime-sm"
-        >
-          <span>Start Section A</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-        </button>
-      </div>
+          <button
+            type="button"
+            onClick={onStartSurvey}
+            className="btn-neon px-9 py-4 rounded-2xl font-black text-sm uppercase tracking-wider inline-flex items-center space-x-2 flex-shrink-0 group shadow-lime-sm cursor-pointer"
+          >
+            <span>Start Section A</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+          </button>
+        </div>
+      </ScrollReveal>
 
     </div>
   );

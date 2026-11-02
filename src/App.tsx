@@ -6,6 +6,9 @@ import { WizardNav } from './components/layout/WizardNav';
 import { Footer } from './components/layout/Footer';
 import { DraftRestoredBanner } from './components/common/DraftRestoredBanner';
 import { CongratulationsConclusion } from './components/submission/CongratulationsConclusion';
+import { ScrollProgressBar } from './components/common/ScrollProgressBar';
+import { ScrollToTopWidget } from './components/common/ScrollToTopWidget';
+import { AmbientBackground } from './components/common/AmbientBackground';
 import { WIZARD_STEPS } from './types/navigation';
 import { useSurveyStore } from './store/surveyStore';
 
@@ -90,7 +93,13 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F4] dark:bg-[#0B0A0F] text-[#0B0A0F] dark:text-[#FBF9F4] transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-[#FBF9F4] dark:bg-[#0B0A0F] text-[#0B0A0F] dark:text-[#FBF9F4] transition-colors duration-300 relative selection:bg-[#CCFF00] selection:text-[#0B0A0F]">
+      
+      {/* 0. Top Dynamic Scroll Progress Indicator */}
+      <ScrollProgressBar />
+
+      {/* 0. Ambient Floating Depth Background & Grid */}
+      <AmbientBackground />
       
       {/* 1. Header with Autosave status & View Switcher */}
       <Header
@@ -202,6 +211,9 @@ export const App: React.FC = () => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
       />
+
+      {/* 4. Interactive Floating Scroll-to-Top Widget */}
+      <ScrollToTopWidget />
     </div>
   );
 };

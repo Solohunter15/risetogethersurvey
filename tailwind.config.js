@@ -135,6 +135,20 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-5px)' },
         },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        pulseRing: {
+          '0%': { transform: 'scale(0.95)', opacity: '0.8' },
+          '50%': { transform: 'scale(1.05)', opacity: '0.3' },
+          '100%': { transform: 'scale(0.95)', opacity: '0.8' },
+        },
+        waveSlow: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(-4deg)' },
+          '75%': { transform: 'rotate(4deg)' },
+        },
       },
       animation: {
         fadeIn: 'fadeIn 0.35s ease-out forwards',
@@ -155,6 +169,9 @@ export default {
         glowPulse: 'glowPulse 3.5s ease-in-out infinite',
         spinSlow: 'spinSlow 20s linear infinite',
         bounceSubtle: 'bounceSubtle 2s ease-in-out infinite',
+        shimmer: 'shimmer 3.5s linear infinite',
+        pulseRing: 'pulseRing 3s ease-in-out infinite',
+        waveSlow: 'waveSlow 8s ease-in-out infinite',
       },
     },
   },
