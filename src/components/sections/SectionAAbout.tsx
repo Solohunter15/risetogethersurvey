@@ -4,6 +4,8 @@ import {
   AcademicStatus,
   UniversityId,
   CommunityId,
+  DifferentlyAbledStatus,
+  EntrepreneurStatus,
 } from '../../types/survey';
 import { SURVEY_QUESTIONS } from '../../data/surveyContent';
 import { useSurveyStore } from '../../store/surveyStore';
@@ -198,6 +200,50 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
           required={q3Meta.subQuestions?.[0]?.required ?? true}
           disabled={isReadOnly || (data.communities || []).includes('none')}
           testId="question-q3-involvement"
+        />
+      </div>
+
+      {/* ==================================================================== */}
+      {/* QUESTION: Differently-Abled Identification                           */}
+      {/* ==================================================================== */}
+      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+        <RadioSingle
+          id="q-differently-abled"
+          name="isDifferentlyAbled"
+          title="Do you identify yourself as a Differently-Abled person?"
+          instruction="Select one option (helps us assess educational accessibility & campus accommodations)."
+          options={[
+            { id: 'yes', label: 'Yes' },
+            { id: 'no', label: 'No' },
+            { id: 'prefer_not_to_say', label: 'Prefer not to say' },
+          ]}
+          value={data.isDifferentlyAbled || ''}
+          onChange={(val) => onChange('isDifferentlyAbled', val as DifferentlyAbledStatus)}
+          disabled={isReadOnly}
+          layout="grid2"
+          testId="question-differently-abled"
+        />
+      </div>
+
+      {/* ==================================================================== */}
+      {/* QUESTION: Entrepreneur / Business Ownership                          */}
+      {/* ==================================================================== */}
+      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+        <RadioSingle
+          id="q-entrepreneur"
+          name="isEntrepreneur"
+          title="Are you an entrepreneur owning / part of a business?"
+          instruction="Select one option."
+          options={[
+            { id: 'yes_founder', label: 'Yes — Founder / Running an active business or venture' },
+            { id: 'yes_part_of_venture', label: 'Yes — Part of a student startup or venture team' },
+            { id: 'no', label: 'No' },
+          ]}
+          value={data.isEntrepreneur || ''}
+          onChange={(val) => onChange('isEntrepreneur', val as EntrepreneurStatus)}
+          disabled={isReadOnly}
+          layout="stacked"
+          testId="question-entrepreneur"
         />
       </div>
     </div>

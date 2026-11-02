@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ onResetDraft, onReturnToHero }) 
               About The Initiative
             </h4>
             <p className="leading-relaxed">
-              This survey connects student voices directly with universities, industry leaders, policymakers, and communities across Kerala to foster systemic higher education reform.
+              This survey connects student voices directly with educational institutions, industry leaders, policymakers, and communities across Kerala to foster systemic higher education reform through The Purple Movement.
             </p>
           </div>
 
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onResetDraft, onReturnToHero }) 
 
         {/* Bottom Attribution */}
         <div className="pt-6 border-t border-[#0B0A0F]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2 font-mono">
-          <p>© 2026 Beyond Syllabus & Rise Together. All student rights reserved.</p>
+          <p>© 2026 The Purple Movement & Rise Together. All student rights reserved.</p>
           <p className="flex items-center space-x-1">
             <span>Empowering students across Kerala</span>
             <Heart className="w-3 h-3 text-[#F15E21] fill-current" />

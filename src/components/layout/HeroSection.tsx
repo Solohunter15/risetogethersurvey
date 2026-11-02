@@ -49,8 +49,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     },
     {
       num: '04',
-      title: 'Are universities & communities providing support?',
-      desc: 'Analyzing the role of student communities (IEDC, μLearn, TinkerHub, FOSS) vs campus restrictions.',
+      title: 'Are educational institutions & communities providing support?',
+      desc: 'Analyzing the role of colleges, polytechnics, universities, and student communities (IEDC, μLearn, TinkerHub, FOSS) vs campus restrictions.',
     },
     {
       num: '05',
@@ -60,7 +60,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     {
       num: '06',
       title: 'What solutions can students build together?',
-      desc: 'Crowdsourcing student-backed interventions to present directly to universities, government, and industry.',
+      desc: 'Crowdsourcing student-backed interventions to present directly to educational institutions, government, and industry.',
     },
   ];
 
@@ -115,7 +115,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-medium leading-relaxed max-w-2xl mx-auto">
-            Understanding the challenges, opportunities, and future of student learning across universities, internships, and communities in Kerala.
+            Understanding the challenges, opportunities, and future of student learning across educational institutions, internships, and communities in Kerala.
           </p>
         </div>
 

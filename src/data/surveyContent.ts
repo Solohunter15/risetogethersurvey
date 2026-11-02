@@ -836,6 +836,8 @@ export const createInitialSurveyResponse = (): SurveyResponse => ({
     communities: [],
     communitiesOther: '',
     involvementLevel: '',
+    isDifferentlyAbled: '',
+    isEntrepreneur: '',
   },
   sectionB: {
     overallExperience: [],

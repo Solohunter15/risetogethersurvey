@@ -70,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
                 Statewide Survey 2026
               </span>
               <span className="font-sans text-xs text-slate-500 dark:text-slate-400 font-medium tracking-tight">
-                Beyond Syllabus Kerala
+                The Purple Movement • Kerala
               </span>
             </div>
           </div>

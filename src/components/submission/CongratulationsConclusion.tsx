@@ -237,7 +237,7 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
             <div>
               <span className="text-slate-400 block text-[11px] uppercase">Initiative</span>
               <span className="font-semibold text-slate-800 dark:text-slate-200 font-sans">
-                Beyond Syllabus • Rise Together 2026
+                The Purple Movement • Rise Together 2026
               </span>
             </div>
             <div>
@@ -451,6 +451,22 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
                       : 'None'}
                   </span>
                 </div>
+                {responses.sectionA.isDifferentlyAbled && (
+                  <div>
+                    <span className="text-slate-400 block text-xs">Differently-Abled:</span>
+                    <span className="font-medium text-slate-800 dark:text-slate-200">
+                      {responses.sectionA.isDifferentlyAbled === 'yes' ? 'Yes' : responses.sectionA.isDifferentlyAbled === 'no' ? 'No' : 'Prefer not to say'}
+                    </span>
+                  </div>
+                )}
+                {responses.sectionA.isEntrepreneur && (
+                  <div>
+                    <span className="text-slate-400 block text-xs">Entrepreneur / Business:</span>
+                    <span className="font-medium text-slate-800 dark:text-slate-200">
+                      {responses.sectionA.isEntrepreneur === 'yes_founder' ? 'Founder / Owner' : responses.sectionA.isEntrepreneur === 'yes_part_of_venture' ? 'Part of Startup' : 'No'}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 

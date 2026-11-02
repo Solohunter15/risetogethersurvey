@@ -73,6 +73,8 @@ export function generateCsvContent(response: SurveyResponse): string {
     'Communities',
     'Communities_Other',
     'Involvement_Level',
+    'Differently_Abled',
+    'Entrepreneur_Status',
     'Overall_Experience',
     'Overall_Experience_Other',
     'Rating_RealWorldProblems',
@@ -119,6 +121,8 @@ export function generateCsvContent(response: SurveyResponse): string {
     Array.isArray(response.sectionA.involvementLevel)
       ? response.sectionA.involvementLevel.join(';')
       : response.sectionA.involvementLevel,
+    response.sectionA.isDifferentlyAbled || '',
+    response.sectionA.isEntrepreneur || '',
     response.sectionB.overallExperience,
     response.sectionB.overallExperienceOther || '',
     response.sectionB.ratings?.A_real_world_problems || 'NA',
@@ -191,12 +195,15 @@ export function generateSummaryText(response: SurveyResponse): string {
   const secA = response.sectionA;
   const secF = response.sectionF;
 
-  return `Beyond Syllabus & Rise Together 2026 - Survey Response Summary
+  const differentlyAbledLabel = secA.isDifferentlyAbled === 'yes' ? 'Yes' : secA.isDifferentlyAbled === 'no' ? 'No' : secA.isDifferentlyAbled ? 'Prefer not to say' : '';
+  const entrepreneurLabel = secA.isEntrepreneur === 'yes_founder' ? 'Yes (Founder / Business Owner)' : secA.isEntrepreneur === 'yes_part_of_venture' ? 'Yes (Part of startup)' : secA.isEntrepreneur === 'no' ? 'No' : '';
+
+  return `The Purple Movement • Rise Together 2026 - Survey Response Summary
 ------------------------------------------------------------
 Academic Status: ${secA.academicStatus}
-University: ${secA.university}
+University / Institution: ${secA.university}
 Programme: ${secA.programme}
-Communities: ${secA.communities?.join(', ') || 'None'}
+Communities: ${secA.communities?.join(', ') || 'None'}${differentlyAbledLabel ? `\nDifferently-Abled: ${differentlyAbledLabel}` : ''}${entrepreneurLabel ? `\nEntrepreneur Status: ${entrepreneurLabel}` : ''}
 
 Key Problem Identified:
 ${secF.majorProblem?.description || secF.majorProblemNarrative || 'N/A'}
@@ -207,7 +214,7 @@ ${secF.proposedSolution?.description || secF.practicalSolutionProposal || 'N/A'}
 Collaborative Readiness: ${secF.initiativeInterest || secF.collaborativeReadiness || 'N/A'}
 ------------------------------------------------------------
 Recorded: ${new Date().toLocaleString()}
-Initiative: Beyond Syllabus & Rise Together 2026`;
+Initiative: The Purple Movement • Rise Together 2026`;
 }
 
 // ---------------------------------------------------------------------------
@@ -232,6 +239,6 @@ export async function submitSurveyToApi(
   return {
     success: true,
     id: submissionId,
-    message: 'Survey responses successfully recorded for Beyond Syllabus & Rise Together 2026.',
+    message: 'Survey responses successfully recorded for The Purple Movement & Rise Together 2026.',
   };
 }

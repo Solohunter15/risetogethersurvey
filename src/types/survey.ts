@@ -43,6 +43,9 @@ export type UniversityId =
   | 'kuhs'
   | 'other';
 
+export type DifferentlyAbledStatus = 'yes' | 'no' | 'prefer_not_to_say' | '';
+export type EntrepreneurStatus = 'yes_founder' | 'yes_part_of_venture' | 'no' | '';
+
 export type CommunityId =
   | 'foss'
   | 'aws_cloud'
@@ -354,6 +357,8 @@ export interface SectionAResponse {
   communities: CommunityId[];
   communitiesOther?: string;
   involvementLevel: CommunityInvolvementLevel | CommunityInvolvementLevel[] | '';
+  isDifferentlyAbled?: DifferentlyAbledStatus;
+  isEntrepreneur?: EntrepreneurStatus;
 }
 
 export interface SectionBResponse {

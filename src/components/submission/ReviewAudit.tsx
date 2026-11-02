@@ -240,6 +240,32 @@ export const ReviewAudit: React.FC<ReviewAuditProps> = ({ onBackToSurvey }) => {
                 )}
               </span>
             </div>
+
+            {responses.sectionA.isDifferentlyAbled && (
+              <div>
+                <span className="text-slate-500 dark:text-slate-400 font-medium block">Differently-Abled Status</span>
+                <span className="font-semibold text-slate-900 dark:text-slate-100">
+                  {responses.sectionA.isDifferentlyAbled === 'yes'
+                    ? 'Yes'
+                    : responses.sectionA.isDifferentlyAbled === 'no'
+                    ? 'No'
+                    : 'Prefer not to say'}
+                </span>
+              </div>
+            )}
+
+            {responses.sectionA.isEntrepreneur && (
+              <div>
+                <span className="text-slate-500 dark:text-slate-400 font-medium block">Entrepreneur / Business Status</span>
+                <span className="font-semibold text-slate-900 dark:text-slate-100">
+                  {responses.sectionA.isEntrepreneur === 'yes_founder'
+                    ? 'Founder / Business Owner'
+                    : responses.sectionA.isEntrepreneur === 'yes_part_of_venture'
+                    ? 'Part of a Startup / Venture'
+                    : 'No'}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
