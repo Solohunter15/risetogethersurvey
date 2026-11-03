@@ -96,7 +96,7 @@ export const SectionCInternships: React.FC<SectionCInternshipsProps> = (props) =
             data-testid="q7-skipped-notice"
             className="p-4 sm:p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 flex items-start space-x-3 text-slate-600 dark:text-slate-300 animate-fadeIn"
           >
-            <Info className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
+            <Info className="w-5 h-5 text-[#0B0A0F] dark:text-[#CCFF00] mt-0.5 flex-shrink-0" />
             <div className="space-y-1">
               <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 Question 7 Skipped (Not Applicable)

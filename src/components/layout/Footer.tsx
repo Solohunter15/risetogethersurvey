@@ -16,12 +16,12 @@ export const Footer: React.FC<FooterProps> = ({ onResetDraft, onReturnToHero }) 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Editorial Vision Quote */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#14121B] border border-[#0B0A0F]/10 dark:border-[#CCFF00]/30 text-center space-y-4 shadow-glass dark:shadow-glass-dark">
+        <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#14121B] border-2 border-[#0B0A0F]/15 dark:border-[#CCFF00]/30 text-center space-y-4 shadow-midnight-sm">
           <p className="font-display font-extrabold text-xl sm:text-2xl text-[#0B0A0F] dark:text-white max-w-2xl mx-auto leading-snug">
-            "From identifying challenges to building solutions. From individual potential to collective progress."
+            “Your Education. Your Experience. Your Voice. Our Collective Future.”
           </p>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            <strong className="text-[#55348A] dark:text-[#CCFF00]">The goal is simple:</strong> To ensure that every student has a meaningful opportunity to turn knowledge into capability, capability into demonstrable work, and demonstrable work into meaningful opportunities.
+            <strong className="text-[#0B0A0F] dark:text-[#CCFF00]">The central purpose:</strong> “We are not just asking students what is wrong. We are bringing students together to understand what needs to change and what we can build together.”
           </p>
         </div>
 
@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onResetDraft, onReturnToHero }) 
               <span>Data Protection & Privacy</span>
             </h4>
             <p className="leading-relaxed">
-              Student participation is voluntary and anonymous. All aggregated data is analyzed exclusively for public higher education research and community development initiatives.
+              Student participation is voluntary and confidential. All aggregated data is analyzed exclusively for public higher education research and community development initiatives.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ onResetDraft, onReturnToHero }) 
                   onClick={onReturnToHero}
                   className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl border border-[#0B0A0F]/15 dark:border-white/20 bg-white dark:bg-[#181622] text-[#0B0A0F] dark:text-white hover:bg-[#CCFF00] hover:text-[#0B0A0F] dark:hover:bg-[#CCFF00] dark:hover:text-[#0B0A0F] text-xs font-bold transition-all shadow-midnight-sm"
                 >
-                  <LayoutGrid className="w-3.5 h-3.5 text-[#F15E21]" />
+                  <LayoutGrid className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
                   <span>Overview</span>
                 </button>
               )}
@@ -86,10 +86,10 @@ export const Footer: React.FC<FooterProps> = ({ onResetDraft, onReturnToHero }) 
 
         {/* Bottom Attribution */}
         <div className="pt-6 border-t border-[#0B0A0F]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2 font-mono">
-          <p>© 2026 The Purple Movement & Rise Together. All student rights reserved.</p>
+          <p>© 2026 The Purple Movement × Kerala. Rise Together 2026.</p>
           <p className="flex items-center space-x-1">
             <span>Empowering students across Kerala</span>
-            <Heart className="w-3 h-3 text-[#F15E21] fill-current" />
+            <Heart className="w-3 h-3 text-[#0B0A0F] dark:text-[#CCFF00] fill-current" />
           </p>
         </div>
 

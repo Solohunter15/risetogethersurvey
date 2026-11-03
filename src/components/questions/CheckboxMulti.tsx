@@ -122,12 +122,12 @@ export const CheckboxMulti: React.FC<CheckboxMultiProps> = ({
               handleToggle(option.id);
             }
           }}
-          className={`group min-h-[48px] flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border cursor-pointer select-none transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 ${
+          className={`group min-h-[52px] flex items-center justify-between p-4 sm:p-5 rounded-2xl border-2 cursor-pointer select-none transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 shadow-xs ${
             isSelected
-              ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00]/15 dark:bg-[#CCFF00]/10 shadow-midnight-sm dark:shadow-lime-sm ring-1 ring-[#CCFF00]'
+              ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00]/10 dark:bg-[#CCFF00]/10 shadow-midnight-sm dark:shadow-lime-sm ring-1 ring-[#0B0A0F]/20 dark:ring-[#CCFF00]/30 font-bold'
               : isDisabledByCap
-              ? 'border-[#0B0A0F]/10 dark:border-white/5 bg-slate-50/80 dark:bg-[#100D1C]/60 opacity-80 hover:border-amber-400/80 cursor-pointer'
-              : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#181622] hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] hover:bg-[#F5F2E9] dark:hover:bg-[#201D2E]'
+              ? 'border-[#0B0A0F]/10 dark:border-white/5 bg-slate-50/80 dark:bg-[#100D1C]/60 opacity-60 cursor-not-allowed'
+              : 'border-[#0B0A0F]/15 dark:border-white/10 bg-white dark:bg-[#121118] hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] hover:bg-[#F5F2E9] dark:hover:bg-[#181622]'
           } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {/* Checkbox Box & Label */}

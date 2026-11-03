@@ -181,17 +181,42 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
         {/* Milestone Badge */}
         <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#CCFF00] text-[#0B0A0F] font-mono text-xs uppercase font-extrabold tracking-wider border border-[#0B0A0F] shadow-midnight-sm">
           <Sparkles className="w-3.5 h-3.5 fill-[#0B0A0F]" />
-          <span>SURVEY COMPLETED // VOICE OFFICIALLY RECORDED</span>
+          <span>YOU DID IT! // YOUR VOICE HAS BEEN HEARD</span>
         </div>
 
         {/* Main Headline */}
         <div className="space-y-3">
           <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#0B0A0F] dark:text-white tracking-tight leading-tight">
-            Congratulations! You Are Shaping Higher Education in Kerala.
+            YOU DID IT! Your Voice Has Been Heard.
           </h1>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
-            Thank you for taking the time to share your honest lived experiences, challenges, and actionable solutions. Every student voice strengthens our collective blueprint.
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
+            Thank you for being part of Rise Together 2026. By sharing your experiences, challenges, and ideas, you have contributed to a collective effort to understand and improve higher education in Kerala.
           </p>
+        </div>
+
+        {/* Contribution Pillars Callout */}
+        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121118] border-2 border-[#0B0A0F]/15 dark:border-white/10 text-left shadow-sm max-w-2xl mx-auto space-y-4">
+          <p className="text-xs sm:text-sm font-bold text-[#0B0A0F] dark:text-[#CCFF00] font-mono uppercase tracking-wider">
+            YOUR RESPONSE IS MORE THAN A SURVEY SUBMISSION.
+          </p>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            It is a contribution towards:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-semibold">
+            {[
+              'More relevant and practical education.',
+              'Better student support systems.',
+              'Greater access to internships and career opportunities.',
+              'Stronger student communities.',
+              'More responsive educational institutions.',
+              'A future shaped by student participation.',
+            ].map((pillar, i) => (
+              <div key={i} className="flex items-start space-x-2 p-2 rounded-xl bg-[#FBF9F4] dark:bg-[#181622] border border-[#0B0A0F]/8 dark:border-white/5">
+                <Check className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00] stroke-[3] mt-0.5 flex-shrink-0" />
+                <span>{pillar}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
       </section>
@@ -414,11 +439,11 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
             {/* Section A */}
             <div className="p-5 rounded-2xl bg-white dark:bg-[#151320] border border-slate-200 dark:border-slate-800 space-y-3 text-xs sm:text-sm">
               <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
-                <span className="font-bold font-mono text-[#F15E21] uppercase">Section A: About You</span>
+                <span className="font-bold font-mono text-[#0B0A0F] dark:text-[#CCFF00] uppercase">Section A: About You</span>
                 <button
                   type="button"
                   onClick={() => onEditSection(1)}
-                  className="inline-flex items-center space-x-1 text-xs font-bold text-purple-700 dark:text-[#CCFF00] hover:underline"
+                  className="inline-flex items-center space-x-1 text-xs font-bold text-[#0B0A0F] dark:text-[#CCFF00] hover:underline"
                 >
                   <Edit3 className="w-3.5 h-3.5" />
                   <span>Edit</span>
@@ -502,15 +527,18 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
       </section>
 
       {/* =================================================================== */}
-      {/* 5. CREATIVE CONCLUSION CALL-TO-ACTION                               */}
+      {/* 5. STRATEGIC CONCLUSION CALL-TO-ACTION                              */}
       {/* =================================================================== */}
-      <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-white dark:bg-[#14121B] border border-[#0B0A0F]/15 dark:border-[#CCFF00]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-glass dark:shadow-glass-dark">
-        <div className="space-y-1 text-center sm:text-left">
-          <h4 className="font-display font-extrabold text-xl text-[#0B0A0F] dark:text-white">
-            "From individual potential to collective progress."
+      <div className="max-w-4xl mx-auto p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#121118] border-2 border-[#0B0A0F] dark:border-[#CCFF00] flex flex-col md:flex-row items-center justify-between gap-6 shadow-midnight-md">
+        <div className="space-y-1.5 text-center md:text-left">
+          <span className="font-mono text-[10px] font-black uppercase tracking-widest text-[#0B0A0F] dark:text-[#CCFF00]">
+            RISE TOGETHER 2026 — THE PURPLE MOVEMENT × KERALA
+          </span>
+          <h4 className="font-display font-black text-xl sm:text-2xl text-[#0B0A0F] dark:text-white">
+            “ONE VOICE. MANY EXPERIENCES. A COLLECTIVE FUTURE.”
           </h4>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md">
-            Rise Together 2026 is an open student-led initiative. Thank you for contributing your voice to systemic education reform in Kerala.
+            The findings will help inform discussions and initiatives aimed at improving Kerala's higher education ecosystem. Thank you for making your voice heard.
           </p>
         </div>
 
@@ -518,15 +546,15 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
           <button
             type="button"
             onClick={onReturnToHome}
-            className="btn-neon px-8 py-3.5 rounded-2xl font-black text-xs uppercase tracking-wider inline-flex items-center space-x-2 shadow-lime-sm cursor-pointer"
+            className="px-8 py-3.5 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00] text-[#CCFF00] dark:text-[#0B0A0F] hover:bg-[#CCFF00] hover:text-[#0B0A0F] dark:hover:bg-white dark:hover:text-[#0B0A0F] font-black text-xs uppercase tracking-wider inline-flex items-center space-x-2 shadow-midnight-sm dark:shadow-lime-sm transition-all hover:scale-102 cursor-pointer"
           >
-            <span>Return to Home Overview</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Return to Homepage</span>
+            <ArrowRight className="w-4 h-4 ml-1" />
           </button>
           <button
             type="button"
             onClick={handleResetSurvey}
-            className="p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
+            className="p-3.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
             title="Start fresh response"
           >
             <RotateCcw className="w-4 h-4" />

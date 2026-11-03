@@ -150,10 +150,10 @@ export const MatrixRating: React.FC<MatrixRatingProps> = ({
                         <label
                           htmlFor={radioId}
                           data-testid={`rating-${row.id}-${opt.value}`}
-                          className={`inline-flex items-center justify-center w-10 h-10 rounded-full cursor-pointer transition-all duration-200 ${
+                          className={`inline-flex items-center justify-center w-10 h-10 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
                             isChecked
-                              ? 'bg-[#0B0A0F] dark:bg-[#CCFF00] text-[#CCFF00] dark:text-[#0B0A0F] font-black shadow-md scale-110 ring-2 ring-[#CCFF00] ring-offset-2 dark:ring-offset-[#1A1826] animate-checkPop'
-                              : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-[#CCFF00]/20 hover:text-[#0B0A0F] dark:hover:text-[#CCFF00] hover:scale-105'
+                              ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#0B0A0F] dark:bg-[#CCFF00] text-[#CCFF00] dark:text-[#0B0A0F] font-black shadow-midnight-sm scale-105 ring-2 ring-[#CCFF00] animate-checkPop'
+                              : 'border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] hover:scale-105'
                           } ${disabled ? 'opacity-40 cursor-not-allowed' : ''}`}
                           title={`${row.code}: ${opt.label}`}
                         >
