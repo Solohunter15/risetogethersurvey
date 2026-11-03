@@ -269,6 +269,9 @@ export interface QuestionOption {
   hasOtherInput?: boolean;
   otherPlaceholder?: string;
   category?: InstitutionalCategory;
+  icon?: string;
+  badge?: string;
+  description?: string;
 }
 
 export interface MatrixRowDefinition {

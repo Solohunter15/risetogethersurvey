@@ -145,8 +145,8 @@ export const App: React.FC = () => {
               aria-live="polite"
               className="bg-white dark:bg-[#121118] border border-[#0B0A0F]/15 dark:border-white/10 rounded-3xl p-6 sm:p-10 md:p-12 shadow-glass dark:shadow-glass-dark transition-all"
             >
-              {/* Section Header (Sections A to F) */}
-              {currentStep < 7 && (
+              {/* Section Header (Sections B to F; Section A has custom Purple Movement display heading) */}
+              {currentStep > 1 && currentStep < 7 && (
                 <div className="mb-8 pb-5 border-b border-[#0B0A0F]/10 dark:border-white/10">
                   <div className="flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-[#0B0A0F] dark:text-[#CCFF00] font-black mb-1.5">
                     <span className="bg-[#CCFF00] text-[#0B0A0F] px-2.5 py-1 rounded-lg font-black tracking-wider border border-[#0B0A0F]/20">

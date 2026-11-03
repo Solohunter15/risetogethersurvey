@@ -3,13 +3,6 @@ import {
   Check, 
   ChevronDown, 
   ChevronUp, 
-  User, 
-  BookOpen, 
-  Briefcase, 
-  Users, 
-  Building2, 
-  Sparkles, 
-  ClipboardCheck,
   LayoutGrid
 } from 'lucide-react';
 import { WIZARD_STEPS } from '../../types/navigation';
@@ -21,16 +14,6 @@ interface ProgressBarProps {
   sectionCompletionStatus?: Record<number, boolean>;
   onReturnToHero?: () => void;
 }
-
-const stepIcons: Record<string, React.FC<{ className?: string }>> = {
-  User,
-  BookOpen,
-  Briefcase,
-  Users,
-  Building2,
-  Sparkles,
-  ClipboardCheck,
-};
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   currentStep,
@@ -48,76 +31,32 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   return (
     <nav 
       aria-label="Survey Progress" 
-      className="mb-8 bg-white dark:bg-[#121118] border border-[#0B0A0F]/15 dark:border-white/10 rounded-3xl p-4 sm:p-5 shadow-glass dark:shadow-glass-dark transition-all"
+      className="mb-8 w-full transition-all"
     >
-      {/* Top Header: Section Meta & Metric */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-        <div className="flex items-center space-x-3">
-          {onReturnToHero && (
-            <button
-              type="button"
-              onClick={onReturnToHero}
-              title="Return to Overview"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-[#FBF9F4] dark:bg-[#181622] hover:bg-[#CCFF00] hover:text-[#0B0A0F] dark:hover:bg-[#CCFF00] dark:hover:text-[#0B0A0F] text-xs font-mono font-bold text-[#0B0A0F] dark:text-white transition-all shadow-midnight-sm"
-            >
-              <LayoutGrid className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
-              <span>Overview</span>
-            </button>
-          )}
-
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="font-mono text-xs font-black text-[#0B0A0F] dark:text-[#CCFF00]">
-                {currentStep <= 6 ? `SECTION ${activeStepMeta.code} OF 6` : 'CONCLUSION'}
-              </span>
-              <span className="text-slate-300 dark:text-slate-700">•</span>
-              <span className="text-xs text-slate-500 font-mono font-medium">
-                {activeStepMeta.code === 'Conclusion' ? 'Celebration & Impact' : activeStepMeta.code === 'Review' ? 'Pre-Submission Audit' : activeStepMeta.title}
-              </span>
-            </div>
-            <h2 className="font-display font-extrabold text-base sm:text-lg text-[#0B0A0F] dark:text-white leading-tight">
-              {activeStepMeta.title}
-            </h2>
-          </div>
-        </div>
-
-        <div className="flex items-center space-x-2">
-          <span className="font-mono text-xs font-black px-2.5 py-1 rounded-full bg-[#CCFF00] text-[#0B0A0F] border border-[#0B0A0F]/20 shadow-lime-sm">
-            {progressPercent}% Complete
-          </span>
+      {/* Top Reassurance Banner (Exact Purple Movement style) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6 gap-2">
+        <p className="font-sans">
+          Your responses save automatically as you go, so you can go back and change anything.
+        </p>
+        {onReturnToHero && (
           <button
             type="button"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden inline-flex items-center space-x-1 px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300"
+            onClick={onReturnToHero}
+            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#0B0A0F] dark:text-[#CCFF00] hover:underline cursor-pointer self-start sm:self-auto"
           >
-            <span>Sections</span>
-            {isMobileMenuOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            <LayoutGrid className="w-3.5 h-3.5" />
+            <span>Return to Overview</span>
           </button>
-        </div>
+        )}
       </div>
 
-      {/* Progress Track with Neon Lime Glow */}
-      <div 
-        className="w-full h-2.5 bg-[#F5F2E9] dark:bg-slate-900 rounded-full overflow-hidden mb-3 border border-[#0B0A0F]/5 dark:border-white/5 relative" 
-        role="progressbar" 
-        aria-valuenow={progressPercent} 
-        aria-valuemin={0} 
-        aria-valuemax={100}
-      >
-        <div
-          className="h-full bg-gradient-to-r from-[#0B0A0F] via-[#759900] to-[#CCFF00] rounded-full transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) shadow-lime-sm relative"
-          style={{ width: `${progressPercent}%` }}
-        />
-      </div>
-
-      {/* Desktop Step Buttons */}
-      <div className="hidden md:grid grid-cols-7 gap-1.5 pt-2 border-t border-slate-100 dark:border-white/5">
+      {/* Horizontal Multi-Step Track (Purple Movement Stepper) */}
+      <div className="hidden md:grid grid-cols-7 gap-3 mb-6">
         {WIZARD_STEPS.map((step) => {
           const isActive = step.stepNumber === currentStep;
           const isVisited = visitedSteps.has(step.stepNumber);
           const isCompleted = sectionCompletionStatus[step.stepNumber];
           const isClickable = isVisited || step.stepNumber <= currentStep;
-          const Icon = stepIcons[step.iconName] || User;
 
           return (
             <button
@@ -125,44 +64,69 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
               type="button"
               disabled={!isClickable}
               onClick={() => onStepClick(step.stepNumber)}
-              className={`group flex flex-col items-center text-center p-2 rounded-2xl transition-all duration-200 ${
-                isActive
-                  ? 'bg-[#CCFF00] text-[#0B0A0F] border border-[#0B0A0F] shadow-midnight-sm scale-102 font-bold animate-popIn'
-                  : isClickable
-                  ? 'hover:bg-[#F5F2E9] dark:hover:bg-[#181622] text-slate-600 dark:text-slate-400 hover:-translate-y-0.5 cursor-pointer'
-                  : 'opacity-40 cursor-not-allowed text-slate-400 dark:text-slate-600'
+              className={`group flex flex-col items-start text-left space-y-2 transition-all duration-200 ${
+                isClickable ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'
               }`}
             >
-              <div
-                className={`w-7 h-7 rounded-xl flex items-center justify-center font-bold text-xs mb-1 transition-transform group-hover:scale-105 ${
+              {/* Step Line Indicator */}
+              <div 
+                className={`w-full h-1 rounded-full transition-all duration-300 ${
                   isActive
-                    ? 'bg-[#0B0A0F] text-[#CCFF00] shadow-sm'
+                    ? 'bg-[#0B0A0F] dark:bg-[#CCFF00] shadow-[0_0_8px_rgba(204,255,0,0.4)]'
                     : isCompleted
-                    ? 'bg-emerald-600 text-white'
+                    ? 'bg-[#0B0A0F]/60 dark:bg-white/60'
                     : isVisited
-                    ? 'bg-slate-800 dark:bg-slate-700 text-white'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                    ? 'bg-[#0B0A0F]/30 dark:bg-white/30'
+                    : 'bg-slate-200 dark:bg-white/10'
                 }`}
-              >
-                {isCompleted ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : <Icon className="w-3.5 h-3.5" />}
-              </div>
+              />
 
-              <span className={`font-mono text-[10px] uppercase font-black tracking-wider ${
-                isActive ? 'text-[#0B0A0F]' : 'text-slate-500'
-              }`}>
-                {step.code === 'Review' ? 'Review' : `Sec ${step.code}`}
-              </span>
-              <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 line-clamp-1 max-w-[85px]">
-                {step.shortTitle}
-              </span>
+              {/* Step Label */}
+              <div className="flex items-center space-x-1.5">
+                {isCompleted && (
+                  <Check className="w-3 h-3 text-emerald-600 dark:text-[#CCFF00] stroke-[3]" />
+                )}
+                <span 
+                  className={`text-xs font-semibold transition-colors ${
+                    isActive
+                      ? 'text-[#0B0A0F] dark:text-[#CCFF00] font-bold'
+                      : isClickable
+                      ? 'text-slate-600 dark:text-slate-400 group-hover:text-[#0B0A0F] dark:group-hover:text-white'
+                      : 'text-slate-400 dark:text-slate-600'
+                  }`}
+                >
+                  {step.shortTitle}
+                </span>
+              </div>
             </button>
           );
         })}
       </div>
 
+      {/* Mobile Stepper Header */}
+      <div className="md:hidden flex items-center justify-between p-3.5 rounded-2xl bg-white dark:bg-[#121118] border border-[#0B0A0F]/15 dark:border-white/10 shadow-xs mb-4">
+        <div>
+          <span className="font-mono text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+            Step {currentStep} of {totalSteps}: {activeStepMeta.shortTitle}
+          </span>
+          <div className="text-xs font-bold text-[#0B0A0F] dark:text-white mt-0.5">
+            {progressPercent}% Complete
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="inline-flex items-center space-x-1 px-3 py-1.5 text-xs font-bold rounded-xl border border-[#0B0A0F]/15 dark:border-white/15 bg-[#FBF9F4] dark:bg-[#181622] text-[#0B0A0F] dark:text-white"
+        >
+          <span>Sections</span>
+          {isMobileMenuOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+        </button>
+      </div>
+
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden mt-3 pt-3 border-t border-slate-100 dark:border-white/10 space-y-1.5 animate-flowIn">
+        <div className="md:hidden mb-6 p-3 rounded-2xl bg-white dark:bg-[#121118] border border-[#0B0A0F]/15 dark:border-white/10 space-y-1.5 animate-flowIn shadow-glass">
           {WIZARD_STEPS.map((step) => {
             const isActive = step.stepNumber === currentStep;
             const isVisited = visitedSteps.has(step.stepNumber);
@@ -203,6 +167,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           })}
         </div>
       )}
+
+      {/* Step Indicator Subtitle (e.g. Step 1 of 7: About You) */}
+      <div className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 font-sans tracking-tight mb-2">
+        Step {currentStep} of {totalSteps}: {activeStepMeta.shortTitle}
+      </div>
     </nav>
   );
 };

@@ -80,26 +80,51 @@ export const WizardNav: React.FC<WizardNavProps> = ({
           type="button"
           onClick={onNext}
           disabled={!canProceed || isSubmitting}
-          className={`w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-8 py-3.5 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all focus:outline-none cursor-pointer ${
+          className={`w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-8 py-3.5 rounded-full font-bold text-xs sm:text-sm tracking-wide transition-all focus:outline-none cursor-pointer ${
             canProceed && !isSubmitting
-              ? 'btn-neon shadow-lime-sm'
+              ? 'bg-[#0B0A0F] dark:bg-[#CCFF00] text-white dark:text-[#0B0A0F] hover:bg-[#CCFF00] hover:text-[#0B0A0F] dark:hover:bg-white dark:hover:text-[#0B0A0F] shadow-midnight-sm dark:shadow-lime-sm hover:scale-102 active:scale-98'
               : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed border-transparent shadow-none'
           }`}
         >
-          {currentStep === 6 ? (
+          {currentStep === 1 ? (
+            <>
+              <span>Continue to Academic Experience</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </>
+          ) : currentStep === 2 ? (
+            <>
+              <span>Continue to Internships & Career</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </>
+          ) : currentStep === 3 ? (
+            <>
+              <span>Continue to Student Communities</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </>
+          ) : currentStep === 4 ? (
+            <>
+              <span>Continue to Institutional Challenges</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </>
+          ) : currentStep === 5 ? (
+            <>
+              <span>Continue to Voices & Solutions</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </>
+          ) : currentStep === 6 ? (
             <>
               <span>Complete Survey & View Conclusion</span>
-              <Sparkles className="w-4 h-4 fill-[#0B0A0F]" />
+              <Sparkles className="w-4 h-4 ml-1 fill-current" />
             </>
           ) : isReviewStep ? (
             <>
               <span>{isSubmitting ? 'Transmitting...' : 'Submit Survey'}</span>
-              <ClipboardCheck className="w-4 h-4" />
+              <ClipboardCheck className="w-4 h-4 ml-1" />
             </>
           ) : (
             <>
               <span>Next Section</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 ml-1" />
             </>
           )}
         </button>
