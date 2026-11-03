@@ -11,6 +11,8 @@ import { SURVEY_QUESTIONS } from '../../data/surveyContent';
 import { useSurveyStore } from '../../store/surveyStore';
 import { DropdownSelect } from '../questions/DropdownSelect';
 import { CheckboxMulti } from '../questions/CheckboxMulti';
+import { SectionEntrepreneur } from './SectionEntrepreneur';
+import { SectionOrganisation } from './SectionOrganisation';
 import {
   Sparkles,
   BookOpen,
@@ -21,11 +23,12 @@ import {
   Briefcase,
   HelpCircle,
   Rocket,
-  Building2,
   Accessibility,
   HeartHandshake,
   CheckCircle2,
   ShieldAlert,
+  User,
+  Users2,
 } from 'lucide-react';
 
 export interface SectionAAboutProps {
@@ -153,9 +156,32 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
     <div className="space-y-8 animate-fadeIn" data-testid="section-a-about">
       
       {/* ==================================================================== */}
+      {/* STEPPER / BREADCRUMBS BAR (PURPLE MOVEMENT ARCHETYPE)                */}
+      {/* ==================================================================== */}
+      <div className="border-b border-slate-200 dark:border-white/10 pb-3">
+        <div className="flex items-center space-x-6 sm:space-x-10 text-xs sm:text-sm font-semibold overflow-x-auto no-scrollbar">
+          <div className="relative pb-3 text-[#7C3AED] dark:text-[#A78BFA] font-bold border-b-2 border-[#7C3AED] dark:border-[#A78BFA] -mb-[13px] flex items-center gap-1.5 shrink-0">
+            <span>Path</span>
+          </div>
+          <div className="pb-3 text-slate-400 dark:text-slate-500 shrink-0">
+            Contribution
+          </div>
+          <div className="pb-3 text-slate-400 dark:text-slate-500 shrink-0">
+            Contact
+          </div>
+          <div className="pb-3 text-slate-400 dark:text-slate-500 shrink-0">
+            Review
+          </div>
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
       {/* SECTION INTRO HEADING (PURPLE MOVEMENT STYLE)                        */}
       {/* ==================================================================== */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
+        <p className="text-xs uppercase tracking-wider font-bold text-[#7C3AED] dark:text-[#A78BFA]">
+          Step 1 of 4: Path
+        </p>
         <h1 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-[#0B0A0F] dark:text-white tracking-tight">
           How would you like to take part?
         </h1>
@@ -167,166 +193,188 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
       {/* ==================================================================== */}
       {/* 1. THREE CONTAINERS AT FIRST: STUDENT, ENTREPRENEUR, OR ORGANIZATION  */}
       {/* ==================================================================== */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="text-sm font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-slate-300">
-            Are you a student, entrepreneur, or organization?
-            <span className="text-[#0B0A0F] dark:text-[#CCFF00] font-black ml-1">*</span>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5" role="radiogroup" aria-label="Participant Role">
+        
+        {/* Container 1: Student / Individual */}
+        <div
+          role="radio"
+          aria-checked={currentRole === 'student'}
+          tabIndex={isReadOnly ? -1 : 0}
+          onClick={() => handleRoleSelect('student')}
+          onKeyDown={(e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+              e.preventDefault();
+              handleRoleSelect('student');
+            }
+          }}
+          className={`p-6 rounded-2xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
+            currentRole === 'student'
+              ? 'border-2 border-[#7C3AED] bg-white dark:bg-[#1E1A2E] shadow-lg ring-4 ring-[#7C3AED]/15'
+              : 'border-slate-200 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#7C3AED]/60 hover:-translate-y-0.5 shadow-xs'
+          } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
+          <div>
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-[#7C3AED] text-white flex items-center justify-center shadow-xs shrink-0">
+                  <User className="w-5 h-5" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-[#0B0A0F] dark:text-white">
+                  Individual
+                </h3>
+              </div>
+              <div
+                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                  currentRole === 'student'
+                    ? 'border-[#7C3AED] bg-[#7C3AED]'
+                    : 'border-slate-300 dark:border-slate-600 bg-transparent'
+                }`}
+              >
+                {currentRole === 'student' && (
+                  <span className="w-2 h-2 rounded-full bg-white" />
+                )}
+              </div>
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
+              Students, creators, entrepreneurs and professionals. Bring your skills, time, ideas or mentorship to activities and projects.
+            </p>
           </div>
-          <span className="text-xs text-slate-500 font-medium italic">
-            Select one.
-          </span>
-        </div>
-
-        {/* 3 Containers Grid */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-label="Participant Role">
-            
-            {/* Container 1: Student */}
-            <div
-              role="radio"
-              aria-checked={currentRole === 'student'}
-              tabIndex={isReadOnly ? -1 : 0}
-              onClick={() => handleRoleSelect('student')}
-              onKeyDown={(e) => {
-                if (e.key === ' ' || e.key === 'Enter') {
-                  e.preventDefault();
-                  handleRoleSelect('student');
-                }
-              }}
-              className={`p-5 rounded-xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
-                currentRole === 'student'
-                  ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
-                  : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:-translate-y-0.5'
-              } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              <div className="flex items-center justify-between gap-3 mb-3">
-                <div
-                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold transition-colors ${
-                    currentRole === 'student'
-                      ? 'bg-[#0B0A0F] text-[#CCFF00] dark:bg-[#CCFF00] dark:text-[#0B0A0F]'
-                      : 'bg-[#0B0A0F]/8 dark:bg-white/10 text-[#0B0A0F] dark:text-white'
-                  }`}
-                >
-                  <GraduationCap className="w-3.5 h-3.5" />
-                  <span>Student</span>
-                </div>
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                    currentRole === 'student'
-                      ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]'
-                      : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800'
-                  }`}
-                >
-                  {currentRole === 'student' && (
-                    <span className="w-2 h-2 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />
-                  )}
-                </div>
-              </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
-                Students, creators, and researchers enrolled in higher education or learning pathways in Kerala.
-              </p>
-            </div>
-
-            {/* Container 2: Entrepreneur */}
-            <div
-              role="radio"
-              aria-checked={currentRole === 'entrepreneur'}
-              tabIndex={isReadOnly ? -1 : 0}
-              onClick={() => handleRoleSelect('entrepreneur')}
-              onKeyDown={(e) => {
-                if (e.key === ' ' || e.key === 'Enter') {
-                  e.preventDefault();
-                  handleRoleSelect('entrepreneur');
-                }
-              }}
-              className={`p-5 rounded-xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
-                currentRole === 'entrepreneur'
-                  ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
-                  : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:-translate-y-0.5'
-              } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              <div className="flex items-center justify-between gap-3 mb-3">
-                <div
-                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold transition-colors ${
-                    currentRole === 'entrepreneur'
-                      ? 'bg-[#0B0A0F] text-[#CCFF00] dark:bg-[#CCFF00] dark:text-[#0B0A0F]'
-                      : 'bg-[#0B0A0F]/8 dark:bg-white/10 text-[#0B0A0F] dark:text-white'
-                  }`}
-                >
-                  <Rocket className="w-3.5 h-3.5" />
-                  <span>Entrepreneur</span>
-                </div>
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                    currentRole === 'entrepreneur'
-                      ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]'
-                      : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800'
-                  }`}
-                >
-                  {currentRole === 'entrepreneur' && (
-                    <span className="w-2 h-2 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />
-                  )}
-                </div>
-              </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
-                Founders, student startup creators, and business builders turning ideas into active ventures.
-              </p>
-            </div>
-
-            {/* Container 3: Organization */}
-            <div
-              role="radio"
-              aria-checked={currentRole === 'organization'}
-              tabIndex={isReadOnly ? -1 : 0}
-              onClick={() => handleRoleSelect('organization')}
-              onKeyDown={(e) => {
-                if (e.key === ' ' || e.key === 'Enter') {
-                  e.preventDefault();
-                  handleRoleSelect('organization');
-                }
-              }}
-              className={`p-5 rounded-xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
-                currentRole === 'organization'
-                  ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
-                  : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:-translate-y-0.5'
-              } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              <div className="flex items-center justify-between gap-3 mb-3">
-                <div
-                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold transition-colors ${
-                    currentRole === 'organization'
-                      ? 'bg-[#0B0A0F] text-[#CCFF00] dark:bg-[#CCFF00] dark:text-[#0B0A0F]'
-                      : 'bg-[#0B0A0F]/8 dark:bg-white/10 text-[#0B0A0F] dark:text-white'
-                  }`}
-                >
-                  <Building2 className="w-3.5 h-3.5" />
-                  <span>Organization</span>
-                </div>
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                    currentRole === 'organization'
-                      ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]'
-                      : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800'
-                  }`}
-                >
-                  {currentRole === 'organization' && (
-                    <span className="w-2 h-2 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />
-                  )}
-                </div>
-              </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
-                Educational institutions, student communities (IEDC, μLearn, TinkerHub), companies, and labs.
-              </p>
-            </div>
-
+          <div className="pt-4 mt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+            <span className={`font-semibold ${currentRole === 'student' ? 'text-[#7C3AED] dark:text-[#A78BFA]' : 'text-slate-400'}`}>
+              Higher education & student survey
+            </span>
+            {currentRole === 'student' && (
+              <span className="inline-flex items-center text-[#7C3AED] dark:text-[#A78BFA] font-bold">
+                Selected
+              </span>
+            )}
           </div>
         </div>
+
+        {/* Container 2: Organization */}
+        <div
+          role="radio"
+          aria-checked={currentRole === 'organization'}
+          tabIndex={isReadOnly ? -1 : 0}
+          onClick={() => handleRoleSelect('organization')}
+          onKeyDown={(e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+              e.preventDefault();
+              handleRoleSelect('organization');
+            }
+          }}
+          className={`p-6 rounded-2xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
+            currentRole === 'organization'
+              ? 'border-2 border-[#7C3AED] bg-white dark:bg-[#1E1A2E] shadow-lg ring-4 ring-[#7C3AED]/15'
+              : 'border-slate-200 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#7C3AED]/60 hover:-translate-y-0.5 shadow-xs'
+          } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
+          <div>
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-[#7C3AED] text-white flex items-center justify-center shadow-xs shrink-0">
+                  <Users2 className="w-5 h-5" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-[#0B0A0F] dark:text-white">
+                  Organization
+                </h3>
+              </div>
+              <div
+                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                  currentRole === 'organization'
+                    ? 'border-[#7C3AED] bg-[#7C3AED]'
+                    : 'border-slate-300 dark:border-slate-600 bg-transparent'
+                }`}
+              >
+                {currentRole === 'organization' && (
+                  <span className="w-2 h-2 rounded-full bg-white" />
+                )}
+              </div>
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
+              Nonprofits, startups, companies, universities and research labs. Offer real challenges, expertise, venues or people — and co-run sessions or pilots.
+            </p>
+          </div>
+          <div className="pt-4 mt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+            <span className={`font-semibold ${currentRole === 'organization' ? 'text-[#7C3AED] dark:text-[#A78BFA]' : 'text-slate-400'}`}>
+              Organization survey
+            </span>
+            {currentRole === 'organization' && (
+              <span className="inline-flex items-center text-[#7C3AED] dark:text-[#A78BFA] font-bold">
+                Selected
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Container 3: Entrepreneur */}
+        <div
+          role="radio"
+          aria-checked={currentRole === 'entrepreneur'}
+          tabIndex={isReadOnly ? -1 : 0}
+          onClick={() => handleRoleSelect('entrepreneur')}
+          onKeyDown={(e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+              e.preventDefault();
+              handleRoleSelect('entrepreneur');
+            }
+          }}
+          className={`p-6 rounded-2xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
+            currentRole === 'entrepreneur'
+              ? 'border-2 border-[#7C3AED] bg-white dark:bg-[#1E1A2E] shadow-lg ring-4 ring-[#7C3AED]/15'
+              : 'border-slate-200 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#7C3AED]/60 hover:-translate-y-0.5 shadow-xs'
+          } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
+          <div>
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-[#7C3AED] text-white flex items-center justify-center shadow-xs shrink-0">
+                  <Rocket className="w-5 h-5" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-[#0B0A0F] dark:text-white">
+                  Entrepreneur
+                </h3>
+              </div>
+              <div
+                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                  currentRole === 'entrepreneur'
+                    ? 'border-[#7C3AED] bg-[#7C3AED]'
+                    : 'border-slate-300 dark:border-slate-600 bg-transparent'
+                }`}
+              >
+                {currentRole === 'entrepreneur' && (
+                  <span className="w-2 h-2 rounded-full bg-white" />
+                )}
+              </div>
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
+              Founders, startup creators, and business builders turning ideas into active ventures across the ecosystem.
+            </p>
+          </div>
+          <div className="pt-4 mt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-xs">
+            <span className={`font-semibold ${currentRole === 'entrepreneur' ? 'text-[#7C3AED] dark:text-[#A78BFA]' : 'text-slate-400'}`}>
+              Founder questionnaire
+            </span>
+            {currentRole === 'entrepreneur' && (
+              <span className="inline-flex items-center text-[#7C3AED] dark:text-[#A78BFA] font-bold">
+                Selected
+              </span>
+            )}
+          </div>
+        </div>
+
       </div>
 
-      {/* ==================================================================== */}
-      {/* 2. QUESTION ABOUT DISABILITY (DIFFERENTLY-ABLED PERSON)               */}
-      {/* ==================================================================== */}
+      {/* Dynamic Pathway View: Student vs Entrepreneur vs Organization */}
+      {currentRole === 'entrepreneur' ? (
+        <SectionEntrepreneur />
+      ) : currentRole === 'organization' ? (
+        <SectionOrganisation />
+      ) : (
+        <>
+          {/* ==================================================================== */}
+          {/* 2. QUESTION ABOUT DISABILITY (DIFFERENTLY-ABLED PERSON)               */}
+          {/* ==================================================================== */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4" data-testid="question-differently-abled">
         <div className="flex items-center justify-between">
           <div className="text-sm font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-slate-300 flex items-center space-x-2">
@@ -646,6 +694,8 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
           />
         </div>
       </div>
+        </>
+      )}
 
     </div>
   );
