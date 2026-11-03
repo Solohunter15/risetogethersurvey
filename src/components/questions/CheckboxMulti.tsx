@@ -18,6 +18,7 @@ export interface CheckboxMultiProps {
   error?: string | null;
   required?: boolean;
   disabled?: boolean;
+  layout?: 'stacked' | 'grid2';
   testId?: string;
 }
 
@@ -37,6 +38,7 @@ export const CheckboxMulti: React.FC<CheckboxMultiProps> = ({
   error,
   required = false,
   disabled = false,
+  layout = 'stacked',
   testId,
 }) => {
   const componentId = useId();
@@ -122,12 +124,12 @@ export const CheckboxMulti: React.FC<CheckboxMultiProps> = ({
               handleToggle(option.id);
             }
           }}
-          className={`group min-h-[52px] flex items-center justify-between p-4 sm:p-5 rounded-2xl border-2 cursor-pointer select-none transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 shadow-xs ${
+          className={`group min-h-[48px] flex items-center justify-between p-3.5 sm:p-4 rounded-xl border cursor-pointer select-none transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 ${
             isSelected
-              ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00]/10 dark:bg-[#CCFF00]/10 shadow-midnight-sm dark:shadow-lime-sm ring-1 ring-[#0B0A0F]/20 dark:ring-[#CCFF00]/30 font-bold'
+              ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
               : isDisabledByCap
-              ? 'border-[#0B0A0F]/10 dark:border-white/5 bg-slate-50/80 dark:bg-[#100D1C]/60 opacity-60 cursor-not-allowed'
-              : 'border-[#0B0A0F]/15 dark:border-white/10 bg-white dark:bg-[#121118] hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] hover:bg-[#F5F2E9] dark:hover:bg-[#181622]'
+              ? 'border-[#0B0A0F]/10 dark:border-white/5 bg-slate-50/80 dark:bg-[#100D1C]/60 opacity-80 hover:border-amber-400/80 cursor-pointer'
+              : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:bg-[#F5F2E9] dark:hover:bg-[#1c1a29]'
           } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {/* Checkbox Box & Label */}
@@ -232,22 +234,22 @@ export const CheckboxMulti: React.FC<CheckboxMultiProps> = ({
         </div>
       )}
 
-      {/* Options Rendering: Categorized (Q11) vs Standard List */}
+      {/* Box Container for Choices */}
       {categories && categories.length > 0 ? (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {categories.map((cat) => {
             const categoryOptions = options.filter((opt) => cat.optionIds.includes(opt.id));
             if (categoryOptions.length === 0) return null;
 
             return (
-              <div key={cat.id} className="space-y-2.5">
-                <div className="flex items-center space-x-2 pb-1 border-b border-slate-100 dark:border-slate-800">
-                  <span className="w-2 h-2 rounded-full bg-[#CCFF00]" />
-                  <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+              <div key={cat.id} className="p-4 sm:p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10 space-y-3">
+                <div className="flex items-center space-x-2 pb-2 border-b border-[#0B0A0F]/10 dark:border-white/10">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#CCFF00] border border-[#0B0A0F]/20" />
+                  <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-white">
                     {cat.title}
                   </h4>
                 </div>
-                <div className="flex flex-col space-y-2">
+                <div className={layout === 'grid2' ? 'grid grid-cols-1 sm:grid-cols-2 gap-2.5' : 'flex flex-col space-y-2'}>
                   {categoryOptions.map(renderOptionCard)}
                 </div>
               </div>
@@ -256,14 +258,16 @@ export const CheckboxMulti: React.FC<CheckboxMultiProps> = ({
 
           {/* Render Standalone Exclusive or "Other" options not in categories */}
           {options.filter((o) => !o.category).length > 0 && (
-            <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10 space-y-2">
               {options.filter((o) => !o.category).map(renderOptionCard)}
             </div>
           )}
         </div>
       ) : (
-        <div className="flex flex-col space-y-2.5">
-          {options.map(renderOptionCard)}
+        <div className="p-3.5 sm:p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10">
+          <div className={layout === 'grid2' ? 'grid grid-cols-1 sm:grid-cols-2 gap-2.5' : 'flex flex-col space-y-2.5'}>
+            {options.map(renderOptionCard)}
+          </div>
         </div>
       )}
 

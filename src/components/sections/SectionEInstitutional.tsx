@@ -31,33 +31,36 @@ export const SectionEInstitutional: React.FC<SectionEInstitutionalProps> = (prop
   const q12Error = errors['improvements'] || errors['sectionE.improvements'] || errors['sectionE.improvementsOther'] || null;
 
   return (
-    <div className="space-y-12 animate-fadeIn" data-testid="section-e-institutional">
+    <div className="space-y-8 animate-fadeIn" data-testid="section-e-institutional">
+      
       {/* ==================================================================== */}
-      {/* QUESTION 11: Institutional Challenges (4 Categories, Global Max 3)  */}
+      {/* QUESTION 11: Institutional Challenges Box Container (4 Categories)  */}
       {/* ==================================================================== */}
-      <CheckboxMulti
-        id="q11"
-        name="experiencedChallenges"
-        title={q11Meta.title}
-        instruction={`${q11Meta.instruction} (Select up to 3 across all categories combined).`}
-        contextNote={q11Meta.contextNote}
-        options={q11Meta.options || []}
-        categories={q11Meta.categories}
-        values={data.experiencedChallenges || []}
-        onChange={(vals) => onChange('experiencedChallenges', vals as InstitutionalChallengeId[])}
-        otherValue={data.experiencedChallengesOther}
-        onOtherChange={(val) => onChange('experiencedChallengesOther', val)}
-        maxSelections={3}
-        error={q11Error}
-        required={q11Meta.required}
-        disabled={isReadOnly}
-        testId="question-q11"
-      />
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
+        <CheckboxMulti
+          id="q11"
+          name="experiencedChallenges"
+          title={q11Meta.title}
+          instruction={`${q11Meta.instruction} (Select up to 3 across all categories combined).`}
+          contextNote={q11Meta.contextNote}
+          options={q11Meta.options || []}
+          categories={q11Meta.categories}
+          values={data.experiencedChallenges || []}
+          onChange={(vals) => onChange('experiencedChallenges', vals as InstitutionalChallengeId[])}
+          otherValue={data.experiencedChallengesOther}
+          onOtherChange={(val) => onChange('experiencedChallengesOther', val)}
+          maxSelections={3}
+          error={q11Error}
+          required={q11Meta.required}
+          disabled={isReadOnly}
+          testId="question-q11"
+        />
+      </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 12: High-Impact Improvements (Max 3)                        */}
+      {/* QUESTION 12: High-Impact Improvements Box Container                  */}
       {/* ==================================================================== */}
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
         <CheckboxMulti
           id="q12"
           name="improvements"
@@ -76,6 +79,7 @@ export const SectionEInstitutional: React.FC<SectionEInstitutionalProps> = (prop
           testId="question-q12"
         />
       </div>
+
     </div>
   );
 };

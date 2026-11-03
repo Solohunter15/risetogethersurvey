@@ -51,35 +51,38 @@ export const SectionFVoices: React.FC<SectionFVoicesProps> = (props) => {
   };
 
   return (
-    <div className="space-y-12 animate-fadeIn" data-testid="section-f-voices">
+    <div className="space-y-8 animate-fadeIn" data-testid="section-f-voices">
+      
       {/* ==================================================================== */}
-      {/* QUESTION 13: Major Problem Narrative                                */}
+      {/* QUESTION 13: Major Problem Narrative Box Container                   */}
       {/* ==================================================================== */}
-      <GuidedTextarea
-        id="q13"
-        name="majorProblem"
-        title={q13Meta.title}
-        instruction={q13Meta.instruction}
-        contextNote={q13Meta.contextNote}
-        guidingPrompts={q13Meta.guidingPrompts}
-        placeholder={q13Meta.placeholder}
-        value={data.majorProblem?.description || data.majorProblemNarrative || ''}
-        onChange={(val) => {
-          onChange('majorProblem', { description: val });
-          onChange('majorProblemNarrative', val);
-        }}
-        minLength={3}
-        maxLength={4000}
-        error={q13Error}
-        required={q13Meta.required}
-        disabled={isReadOnly}
-        testId="question-q13"
-      />
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
+        <GuidedTextarea
+          id="q13"
+          name="majorProblem"
+          title={q13Meta.title}
+          instruction={q13Meta.instruction}
+          contextNote={q13Meta.contextNote}
+          guidingPrompts={q13Meta.guidingPrompts}
+          placeholder={q13Meta.placeholder}
+          value={data.majorProblem?.description || data.majorProblemNarrative || ''}
+          onChange={(val) => {
+            onChange('majorProblem', { description: val });
+            onChange('majorProblemNarrative', val);
+          }}
+          minLength={3}
+          maxLength={4000}
+          error={q13Error}
+          required={q13Meta.required}
+          disabled={isReadOnly}
+          testId="question-q13"
+        />
+      </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 14: Practical Change Proposal                              */}
+      {/* QUESTION 14: Practical Change Proposal Box Container                 */}
       {/* ==================================================================== */}
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
         <GuidedTextarea
           id="q14"
           name="proposedSolution"
@@ -103,9 +106,9 @@ export const SectionFVoices: React.FC<SectionFVoicesProps> = (props) => {
       </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 15: Collaborative Initiative & Contribution Focus          */}
+      {/* QUESTION 15: Collaborative Solution Building Box Container          */}
       {/* ==================================================================== */}
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80 space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-6" data-testid="question-q15-container">
         <RadioSingle
           id="q15"
           name="initiativeInterest"
@@ -121,15 +124,15 @@ export const SectionFVoices: React.FC<SectionFVoicesProps> = (props) => {
           testId="question-q15"
         />
 
-        {/* Conditional Sub-question: Contribution Areas */}
-        {isInterestPositive && (
-          <div className="pt-4 border-t border-dashed border-slate-200 dark:border-slate-800 animate-fadeIn">
+        {/* Conditional Sub-Question: Contribution Areas Box Container */}
+        {isInterestPositive && q15Meta.subQuestions?.[0] && (
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10 shadow-xs space-y-3 animate-fadeIn" data-testid="q15-contribution-areas-container">
             <CheckboxMulti
               id="q15-areas"
               name="contributionAreas"
-              title={q15Meta.subQuestions?.[0]?.title || 'Which areas would you be interested in contributing to?'}
-              instruction={q15Meta.subQuestions?.[0]?.instruction || 'Select all that apply.'}
-              options={q15Meta.subQuestions?.[0]?.options || []}
+              title={q15Meta.subQuestions[0].title}
+              instruction={q15Meta.subQuestions[0].instruction}
+              options={q15Meta.subQuestions[0].options || []}
               values={data.contributionAreas || []}
               onChange={(vals) => onChange('contributionAreas', vals as ContributionAreaId[])}
               otherValue={data.contributionAreasOther}
@@ -142,6 +145,7 @@ export const SectionFVoices: React.FC<SectionFVoicesProps> = (props) => {
           </div>
         )}
       </div>
+
     </div>
   );
 };

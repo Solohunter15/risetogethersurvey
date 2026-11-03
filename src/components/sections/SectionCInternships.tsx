@@ -68,49 +68,57 @@ export const SectionCInternships: React.FC<SectionCInternshipsProps> = (props) =
   };
 
   return (
-    <div className="space-y-12 animate-fadeIn" data-testid="section-c-internships">
+    <div className="space-y-8 animate-fadeIn" data-testid="section-c-internships">
+      
       {/* ==================================================================== */}
-      {/* QUESTION 6: Internship Status                                       */}
+      {/* QUESTION 6: Internship Status Box Container                          */}
       {/* ==================================================================== */}
-      <RadioSingle
-        id="q6"
-        name="internshipStatus"
-        title={q6Meta.title}
-        instruction={q6Meta.instruction}
-        contextNote={q6Meta.contextNote}
-        options={q6Meta.options || []}
-        value={data.internshipStatus}
-        onChange={handleStatusChange}
-        error={q6Error}
-        required={q6Meta.required}
-        disabled={isReadOnly}
-        testId="question-q6"
-      />
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
+        <RadioSingle
+          id="q6"
+          name="internshipStatus"
+          title={q6Meta.title}
+          instruction={q6Meta.instruction}
+          contextNote={q6Meta.contextNote}
+          options={q6Meta.options || []}
+          value={data.internshipStatus}
+          onChange={handleStatusChange}
+          error={q6Error}
+          required={q6Meta.required}
+          disabled={isReadOnly}
+          testId="question-q6"
+        />
+      </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 7: Internship Quality Evaluation (Conditional on Q6)        */}
+      {/* QUESTION 7: Internship Quality Evaluation Box Container (Conditional)*/}
       {/* ==================================================================== */}
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80" data-testid="question-q7-container">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4" data-testid="question-q7-container">
         {!hasInternship ? (
           <div
             data-testid="q7-skipped-notice"
-            className="p-4 sm:p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 flex items-start space-x-3 text-slate-600 dark:text-slate-300 animate-fadeIn"
+            className="p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10 flex items-start space-x-3 text-slate-600 dark:text-slate-300 animate-fadeIn"
           >
             <Info className="w-5 h-5 text-[#0B0A0F] dark:text-[#CCFF00] mt-0.5 flex-shrink-0" />
             <div className="space-y-1">
-              <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200">
-                Question 7 Skipped (Not Applicable)
+              <h4 className="font-bold text-sm text-[#0B0A0F] dark:text-white">
+                Question 7 Not Applicable
               </h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                You indicated that you have not undertaken an internship or that your academic programme does not require one.
-                This question is automatically bypassed. Please proceed to Question 8 below.
+                Because you selected{' '}
+                <strong className="text-[#0B0A0F] dark:text-white font-mono">
+                  {data.internshipStatus === 'not_required'
+                    ? 'Not part of programme'
+                    : 'Not completed / None'}
+                </strong>
+                , Question 7 (Internship Quality Evaluation) has been skipped for you. Please proceed to Question 8.
               </p>
             </div>
           </div>
         ) : (
           <MatrixRating
             id="q7"
-            name="internshipQuality"
+            name="qualityRatings"
             title={q7Meta.title}
             instruction={q7Meta.instruction}
             contextNote={q7Meta.contextNote}
@@ -120,7 +128,7 @@ export const SectionCInternships: React.FC<SectionCInternshipsProps> = (props) =
             onChange={handleQualityRatingChange}
             error={q7Error}
             rowErrors={q7RowErrors}
-            required={hasInternship}
+            required={hasInternship && (q7Meta.required ?? true)}
             disabled={isReadOnly}
             testId="question-q7"
           />
@@ -128,9 +136,9 @@ export const SectionCInternships: React.FC<SectionCInternshipsProps> = (props) =
       </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 8: Barriers to Internships & Opportunities (Max 3)         */}
+      {/* QUESTION 8: Internship Access Barriers Box Container                */}
       {/* ==================================================================== */}
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
         <CheckboxMulti
           id="q8"
           name="barriers"
@@ -149,6 +157,7 @@ export const SectionCInternships: React.FC<SectionCInternshipsProps> = (props) =
           testId="question-q8"
         />
       </div>
+
     </div>
   );
 };

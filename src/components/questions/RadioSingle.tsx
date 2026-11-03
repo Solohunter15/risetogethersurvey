@@ -79,88 +79,92 @@ export const RadioSingle: React.FC<RadioSingleProps> = ({
         </legend>
       )}
 
-      {/* Options Container */}
-      <div
-        className={
-          layout === 'grid2'
-            ? 'grid grid-cols-1 sm:grid-cols-2 gap-3'
-            : 'flex flex-col space-y-2.5'
-        }
+      {/* Box Container for Choices */}
+      <div 
+        className="p-3.5 sm:p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10"
         role="radiogroup"
         aria-required={required}
       >
-        {options.map((option) => {
-          const isSelected = value === option.id;
-
-          return (
-            <div key={option.id} className="relative flex flex-col">
         <div
-          data-testid={`option-${option.id}`}
-          onClick={() => handleOptionClick(option.id)}
-          role="radio"
-          aria-checked={isSelected}
-          tabIndex={disabled ? -1 : 0}
-          onKeyDown={(e) => {
-            if (e.key === ' ' || e.key === 'Enter') {
-              e.preventDefault();
-              handleOptionClick(option.id);
-            }
-          }}
-          className={`group min-h-[52px] flex items-center justify-between p-4 sm:p-5 rounded-2xl border-2 cursor-pointer select-none transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 shadow-xs ${
-            isSelected
-              ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00]/10 dark:bg-[#CCFF00]/10 shadow-midnight-sm dark:shadow-lime-sm ring-1 ring-[#0B0A0F]/20 dark:ring-[#CCFF00]/30 font-bold'
-              : 'border-[#0B0A0F]/15 dark:border-white/10 bg-white dark:bg-[#121118] hover:border-[#0B0A0F] dark:hover:border-[#CCFF00] hover:bg-[#F5F2E9] dark:hover:bg-[#181622]'
-          } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={
+            layout === 'grid2'
+              ? 'grid grid-cols-1 sm:grid-cols-2 gap-3'
+              : 'flex flex-col space-y-2.5'
+          }
         >
-          {/* Visual Label Text */}
-          <div className="flex items-center space-x-3.5 pr-3 pointer-events-none">
-            {/* Custom Radio Button Indicator */}
-            <div
-              className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all flex-shrink-0 ${
-                isSelected
-                  ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#0B0A0F] dark:bg-[#CCFF00] text-white scale-105'
-                  : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 group-hover:border-[#CCFF00]'
-              }`}
-            >
-              {isSelected ? (
-                <span className="w-2 h-2 rounded-full bg-[#CCFF00] dark:bg-[#0B0A0F] block animate-checkPop" />
-              ) : null}
-            </div>
+          {options.map((option) => {
+            const isSelected = value === option.id;
 
-            <span
-              className={`text-sm sm:text-base font-medium leading-snug transition-colors ${
-                isSelected
-                  ? 'text-[#0B0A0F] dark:text-white font-bold'
-                  : 'text-slate-700 dark:text-slate-300'
-              }`}
-            >
-              {option.label}
-            </span>
-          </div>
+            return (
+              <div key={option.id} className="relative flex flex-col">
+                <div
+                  data-testid={`option-${option.id}`}
+                  onClick={() => handleOptionClick(option.id)}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={disabled ? -1 : 0}
+                  onKeyDown={(e) => {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                      e.preventDefault();
+                      handleOptionClick(option.id);
+                    }
+                  }}
+                  className={`group min-h-[48px] flex items-center justify-between p-3.5 sm:p-4 rounded-xl border cursor-pointer select-none transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 ${
+                    isSelected
+                      ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
+                      : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:bg-[#F5F2E9] dark:hover:bg-[#1c1a29]'
+                  } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {/* Visual Label Text */}
+                  <div className="flex items-center space-x-3.5 pr-3 pointer-events-none">
+                    {/* Custom Radio Button Indicator */}
+                    <div
+                      className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all flex-shrink-0 ${
+                        isSelected
+                          ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F] text-white scale-105'
+                          : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 group-hover:border-[#0B0A0F] dark:group-hover:border-[#CCFF00]'
+                      }`}
+                    >
+                      {isSelected ? (
+                        <span className="w-2 h-2 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00] block animate-checkPop" />
+                      ) : null}
+                    </div>
 
-          {/* Checked Icon Pill */}
-          {isSelected && (
-            <span className="flex-shrink-0 text-[#0B0A0F] dark:text-[#CCFF00] pointer-events-none">
-              <Check className="w-4 h-4 stroke-[3] animate-checkPop" />
-            </span>
-          )}
+                    <span
+                      className={`text-sm sm:text-base font-medium leading-snug transition-colors ${
+                        isSelected
+                          ? 'text-[#0B0A0F] dark:text-white font-bold'
+                          : 'text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      {option.label}
+                    </span>
+                  </div>
 
-          {/* Hidden Native Radio Input */}
-          <input
-            type="radio"
-            name={name}
-            value={option.id}
-            checked={isSelected}
-            readOnly
-            disabled={disabled}
-            className="sr-only pointer-events-none"
-            aria-hidden="true"
-            tabIndex={-1}
-          />
+                  {/* Checked Icon Pill */}
+                  {isSelected && (
+                    <span className="flex-shrink-0 text-[#0B0A0F] dark:text-[#CCFF00] pointer-events-none">
+                      <Check className="w-4 h-4 stroke-[3] animate-checkPop" />
+                    </span>
+                  )}
+
+                  {/* Hidden Native Radio Input */}
+                  <input
+                    type="radio"
+                    name={name}
+                    value={option.id}
+                    checked={isSelected}
+                    readOnly
+                    disabled={disabled}
+                    className="sr-only pointer-events-none"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
-            </div>
-          );
-        })}
       </div>
 
       {/* "Other: ___" Inline Text Input Reveal */}

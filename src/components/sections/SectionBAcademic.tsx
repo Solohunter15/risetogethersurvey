@@ -49,32 +49,35 @@ export const SectionBAcademic: React.FC<SectionBAcademicProps> = (props) => {
   };
 
   return (
-    <div className="space-y-12 animate-fadeIn" data-testid="section-b-academic">
+    <div className="space-y-8 animate-fadeIn" data-testid="section-b-academic">
+      
       {/* ==================================================================== */}
-      {/* QUESTION 4: Overall Educational Experience (Max 3)                  */}
+      {/* QUESTION 4: Overall Educational Experience Box Container            */}
       {/* ==================================================================== */}
-      <CheckboxMulti
-        id="q4"
-        name="overallExperience"
-        title={q4Meta.title}
-        instruction={q4Meta.instruction}
-        contextNote={q4Meta.contextNote}
-        options={q4Meta.options || []}
-        values={data.overallExperience || []}
-        onChange={(vals) => onChange('overallExperience', vals as OverallExperienceId[])}
-        otherValue={data.overallExperienceOther}
-        onOtherChange={(val) => onChange('overallExperienceOther', val)}
-        maxSelections={3}
-        error={q4Error}
-        required={q4Meta.required}
-        disabled={isReadOnly}
-        testId="question-q4"
-      />
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
+        <CheckboxMulti
+          id="q4"
+          name="overallExperience"
+          title={q4Meta.title}
+          instruction={q4Meta.instruction}
+          contextNote={q4Meta.contextNote}
+          options={q4Meta.options || []}
+          values={data.overallExperience || []}
+          onChange={(vals) => onChange('overallExperience', vals as OverallExperienceId[])}
+          otherValue={data.overallExperienceOther}
+          onOtherChange={(val) => onChange('overallExperienceOther', val)}
+          maxSelections={3}
+          error={q4Error}
+          required={q4Meta.required}
+          disabled={isReadOnly}
+          testId="question-q4"
+        />
+      </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 5: Learning Experience Likert Rating Matrix                */}
+      {/* QUESTION 5: Learning Experience Likert Rating Matrix Box Container  */}
       {/* ==================================================================== */}
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
         <MatrixRating
           id="q5"
           name="learningExperience"
@@ -92,6 +95,7 @@ export const SectionBAcademic: React.FC<SectionBAcademicProps> = (props) => {
           testId="question-q5"
         />
       </div>
+
     </div>
   );
 };

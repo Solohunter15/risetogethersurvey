@@ -31,32 +31,35 @@ export const SectionDCommunities: React.FC<SectionDCommunitiesProps> = (props) =
   const q10Error = errors['challengesFaced'] || errors['sectionD.challengesFaced'] || errors['sectionD.challengesFacedOther'] || null;
 
   return (
-    <div className="space-y-12 animate-fadeIn" data-testid="section-d-communities">
+    <div className="space-y-8 animate-fadeIn" data-testid="section-d-communities">
+      
       {/* ==================================================================== */}
-      {/* QUESTION 9: Value Gained from Student Communities (Max 3)           */}
+      {/* QUESTION 9: Value Gained from Student Communities Box Container     */}
       {/* ==================================================================== */}
-      <CheckboxMulti
-        id="q9"
-        name="valueGained"
-        title={q9Meta.title}
-        instruction={q9Meta.instruction}
-        contextNote={q9Meta.contextNote}
-        options={q9Meta.options || []}
-        values={data.valueGained || []}
-        onChange={(vals) => onChange('valueGained', vals as CommunityValueId[])}
-        otherValue={data.valueGainedOther}
-        onOtherChange={(val) => onChange('valueGainedOther', val)}
-        maxSelections={3}
-        error={q9Error}
-        required={q9Meta.required}
-        disabled={isReadOnly}
-        testId="question-q9"
-      />
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
+        <CheckboxMulti
+          id="q9"
+          name="valueGained"
+          title={q9Meta.title}
+          instruction={q9Meta.instruction}
+          contextNote={q9Meta.contextNote}
+          options={q9Meta.options || []}
+          values={data.valueGained || []}
+          onChange={(vals) => onChange('valueGained', vals as CommunityValueId[])}
+          otherValue={data.valueGainedOther}
+          onOtherChange={(val) => onChange('valueGainedOther', val)}
+          maxSelections={3}
+          error={q9Error}
+          required={q9Meta.required}
+          disabled={isReadOnly}
+          testId="question-q9"
+        />
+      </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 10: Challenges in Communities (Max 3)                       */}
+      {/* QUESTION 10: Challenges in Communities Box Container                 */}
       {/* ==================================================================== */}
-      <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
         <CheckboxMulti
           id="q10"
           name="challengesFaced"
@@ -75,6 +78,7 @@ export const SectionDCommunities: React.FC<SectionDCommunitiesProps> = (props) =
           testId="question-q10"
         />
       </div>
+
     </div>
   );
 };
