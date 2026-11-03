@@ -5,14 +5,15 @@ import {
   ChevronUp, 
   LayoutGrid
 } from 'lucide-react';
-import { WIZARD_STEPS } from '../../types/navigation';
+import { WIZARD_STEPS, WizardStepMeta } from '../../types/navigation';
 
 interface ProgressBarProps {
-  currentStep: number; // 1 to 7
+  currentStep: number; // 1 to totalSteps
   visitedSteps: Set<number>;
   onStepClick: (stepNumber: number) => void;
   sectionCompletionStatus?: Record<number, boolean>;
   onReturnToHero?: () => void;
+  wizardSteps?: WizardStepMeta[];
 }
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
@@ -21,12 +22,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   onStepClick,
   sectionCompletionStatus = {},
   onReturnToHero,
+  wizardSteps,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const totalSteps = WIZARD_STEPS.length;
+  const activeWizardSteps = wizardSteps || WIZARD_STEPS;
+  const totalSteps = activeWizardSteps.length;
   
-  const progressPercent = Math.round(((currentStep - 1) / (totalSteps - 1)) * 100);
-  const activeStepMeta = WIZARD_STEPS[currentStep - 1] || WIZARD_STEPS[0];
+  const progressPercent = Math.round(((currentStep - 1) / Math.max(1, totalSteps - 1)) * 100);
+  const activeStepMeta = activeWizardSteps[currentStep - 1] || activeWizardSteps[0];
+  const gridColsClass = totalSteps === 6 ? 'md:grid-cols-6' : 'md:grid-cols-7';
 
   return (
     <nav 
@@ -51,8 +55,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       </div>
 
       {/* Horizontal Multi-Step Track (Purple Movement Stepper) */}
-      <div className="hidden md:grid grid-cols-7 gap-3 mb-6">
-        {WIZARD_STEPS.map((step) => {
+      <div className={`hidden md:grid ${gridColsClass} gap-3 mb-6`}>
+        {activeWizardSteps.map((step) => {
           const isActive = step.stepNumber === currentStep;
           const isVisited = visitedSteps.has(step.stepNumber);
           const isCompleted = sectionCompletionStatus[step.stepNumber];
@@ -72,7 +76,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
               <div 
                 className={`w-full h-1 rounded-full transition-all duration-300 ${
                   isActive
-                    ? 'bg-[#0B0A0F] dark:bg-[#CCFF00] shadow-[0_0_8px_rgba(204,255,0,0.4)]'
+                    ? 'bg-[#7C3AED] dark:bg-[#CCFF00] shadow-[0_0_8px_rgba(124,58,237,0.4)] dark:shadow-[0_0_8px_rgba(204,255,0,0.4)]'
                     : isCompleted
                     ? 'bg-[#0B0A0F]/60 dark:bg-white/60'
                     : isVisited
@@ -89,7 +93,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
                 <span 
                   className={`text-xs font-semibold transition-colors ${
                     isActive
-                      ? 'text-[#0B0A0F] dark:text-[#CCFF00] font-bold'
+                      ? 'text-[#7C3AED] dark:text-[#CCFF00] font-bold'
                       : isClickable
                       ? 'text-slate-600 dark:text-slate-400 group-hover:text-[#0B0A0F] dark:group-hover:text-white'
                       : 'text-slate-400 dark:text-slate-600'
@@ -127,7 +131,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
         <div className="md:hidden mb-6 p-3 rounded-2xl bg-white dark:bg-[#121118] border border-[#0B0A0F]/15 dark:border-white/10 space-y-1.5 animate-flowIn shadow-glass">
-          {WIZARD_STEPS.map((step) => {
+          {activeWizardSteps.map((step) => {
             const isActive = step.stepNumber === currentStep;
             const isVisited = visitedSteps.has(step.stepNumber);
             const isCompleted = sectionCompletionStatus[step.stepNumber];
@@ -142,36 +146,28 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
                   onStepClick(step.stepNumber);
                   setIsMobileMenuOpen(false);
                 }}
-                className={`w-full flex items-center justify-between p-2.5 rounded-xl text-left text-xs font-semibold transition-colors ${
+                className={`w-full flex items-center justify-between p-2.5 rounded-xl text-left transition-colors ${
                   isActive
-                    ? 'bg-[#CCFF00] text-[#0B0A0F] font-black border border-[#0B0A0F]'
+                    ? 'bg-[#7C3AED]/10 dark:bg-[#CCFF00]/15 text-[#7C3AED] dark:text-[#CCFF00] font-bold'
                     : isClickable
-                    ? 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                    : 'opacity-40 cursor-not-allowed text-slate-400'
+                    ? 'text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5'
+                    : 'text-slate-400 dark:text-slate-600 cursor-not-allowed opacity-50'
                 }`}
               >
-                <div className="flex items-center space-x-2.5">
-                  <span className="font-mono text-[10px] text-slate-500">[{step.code}]</span>
-                  <span>{step.title}</span>
+                <div className="flex items-center space-x-2">
+                  <span className="font-mono text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-black/5 dark:bg-white/10">
+                    {step.code}
+                  </span>
+                  <span className="text-xs font-medium">{step.title}</span>
                 </div>
-                <div className="flex items-center space-x-1.5">
-                  {isCompleted && <Check className="w-3.5 h-3.5 text-emerald-600" />}
-                  {isActive && (
-                    <span className="font-mono text-[10px] text-[#0B0A0F] font-black bg-white px-2 py-0.5 rounded-full">
-                      ACTIVE
-                    </span>
-                  )}
-                </div>
+                {isCompleted && (
+                  <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-[#CCFF00] stroke-[3]" />
+                )}
               </button>
             );
           })}
         </div>
       )}
-
-      {/* Step Indicator Subtitle (e.g. Step 1 of 7: About You) */}
-      <div className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 font-sans tracking-tight mb-2">
-        Step {currentStep} of {totalSteps}: {activeStepMeta.shortTitle}
-      </div>
     </nav>
   );
 };

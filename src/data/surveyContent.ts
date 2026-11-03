@@ -881,5 +881,83 @@ export const createInitialSurveyResponse = (): SurveyResponse => ({
     contributionAreas: [],
     contributionAreasOther: '',
   },
+  organization: {
+    sectionA: {
+      orgType: '',
+      orgTypeOther: '',
+      orgRole: '',
+      orgRoleOther: '',
+      studentEngagement: [],
+      studentEngagementOther: '',
+    },
+    sectionB: {
+      expectedCapabilities: [],
+      expectedCapabilitiesOther: '',
+      freshGraduateReadiness: '',
+      commonGaps: [],
+      commonGapsOther: '',
+      evaluationMethods: [],
+      evaluationMethodsOther: '',
+    },
+    sectionC: {
+      collaborationChallenges: [],
+      collaborationChallengesOther: '',
+      preventionReasons: [],
+      preventionReasonsOther: '',
+      collaborationInterest: '',
+    },
+    sectionD: {
+      potentialOpportunities: [],
+      potentialOpportunitiesOther: '',
+      collaborationAreas: [],
+      collaborationAreasOther: '',
+      encouragementFactors: [],
+      encouragementFactorsOther: '',
+    },
+    sectionE: {
+      majorEcosystemProblem: '',
+      practicalChangeProposal: '',
+    },
+  },
+  entrepreneur: {
+    sectionA: {
+      entrepreneurPosition: '',
+      entrepreneurPositionOther: '',
+      journeyStage: '',
+      operatingSectors: [],
+      operatingSectorsOther: '',
+    },
+    sectionB: {
+      motivations: [],
+      motivationsOther: '',
+      ventureChallenges: [],
+      ventureChallengesOther: '',
+      resourceDifficultyRatings: {},
+    },
+    sectionC: {
+      fundingChallenges: [],
+      fundingChallengesOther: '',
+      marketAccessChallenges: [],
+      marketAccessChallengesOther: '',
+      ecosystemSupportRatings: {},
+    },
+    sectionD: {
+      academicInstitutionSupport: '',
+      academicInstitutionSupportOther: '',
+      talentChallenges: [],
+      talentChallengesOther: '',
+    },
+    sectionE: {
+      systemicChallenges: [],
+      systemicChallengesOther: '',
+      personalExperienceChallenge: '',
+      ecosystemProposedSolution: '',
+    },
+    sectionF: {
+      supportDifference: [],
+      supportDifferenceOther: '',
+      collaborativeInterest: '',
+    },
+  },
 });
 

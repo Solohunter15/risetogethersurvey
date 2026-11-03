@@ -11,6 +11,7 @@ interface WizardNavProps {
   canProceed?: boolean;
   validationError?: string | null;
   isSubmitting?: boolean;
+  nextSectionTitle?: string;
 }
 
 export const WizardNav: React.FC<WizardNavProps> = ({
@@ -23,9 +24,11 @@ export const WizardNav: React.FC<WizardNavProps> = ({
   canProceed = true,
   validationError = null,
   isSubmitting = false,
+  nextSectionTitle,
 }) => {
   const isFirstStep = currentStep === 1;
   const isReviewStep = currentStep === totalSteps;
+  const isPenultimateStep = currentStep === totalSteps - 1;
 
   return (
     <div className="mt-10 pt-6 border-t border-[#0B0A0F]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -86,40 +89,20 @@ export const WizardNav: React.FC<WizardNavProps> = ({
               : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed border-transparent shadow-none'
           }`}
         >
-          {currentStep === 1 ? (
+          {isReviewStep ? (
             <>
-              <span>Continue to Academic Experience</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <span>{isSubmitting ? 'Transmitting...' : 'Submit Survey'}</span>
+              <ClipboardCheck className="w-4 h-4 ml-1" />
             </>
-          ) : currentStep === 2 ? (
-            <>
-              <span>Continue to Internships & Career</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </>
-          ) : currentStep === 3 ? (
-            <>
-              <span>Continue to Student Communities</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </>
-          ) : currentStep === 4 ? (
-            <>
-              <span>Continue to Institutional Challenges</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </>
-          ) : currentStep === 5 ? (
-            <>
-              <span>Continue to Voices & Solutions</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </>
-          ) : currentStep === 6 ? (
+          ) : isPenultimateStep ? (
             <>
               <span>Complete Survey & View Conclusion</span>
               <Sparkles className="w-4 h-4 ml-1 fill-current" />
             </>
-          ) : isReviewStep ? (
+          ) : nextSectionTitle ? (
             <>
-              <span>{isSubmitting ? 'Transmitting...' : 'Submit Survey'}</span>
-              <ClipboardCheck className="w-4 h-4 ml-1" />
+              <span>Continue to {nextSectionTitle}</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
             </>
           ) : (
             <>

@@ -410,6 +410,86 @@ export interface SectionFResponse {
   collaborativeReadiness?: CollaborativeReadiness;
 }
 
+export interface OrganizationSurveyResponse {
+  sectionA: {
+    orgType: string;
+    orgTypeOther?: string;
+    orgRole: string;
+    orgRoleOther?: string;
+    studentEngagement: string[];
+    studentEngagementOther?: string;
+  };
+  sectionB: {
+    expectedCapabilities: string[]; // max 5
+    expectedCapabilitiesOther?: string;
+    freshGraduateReadiness: string;
+    commonGaps: string[]; // max 3
+    commonGapsOther?: string;
+    evaluationMethods: string[];
+    evaluationMethodsOther?: string;
+  };
+  sectionC: {
+    collaborationChallenges: string[]; // max 3
+    collaborationChallengesOther?: string;
+    preventionReasons: string[]; // max 3
+    preventionReasonsOther?: string;
+    collaborationInterest: string;
+  };
+  sectionD: {
+    potentialOpportunities: string[];
+    potentialOpportunitiesOther?: string;
+    collaborationAreas: string[]; // max 3
+    collaborationAreasOther?: string;
+    encouragementFactors: string[]; // max 3
+    encouragementFactorsOther?: string;
+  };
+  sectionE: {
+    majorEcosystemProblem: string;
+    practicalChangeProposal: string;
+  };
+}
+
+export interface EntrepreneurSurveyResponse {
+  sectionA: {
+    entrepreneurPosition: string;
+    entrepreneurPositionOther?: string;
+    journeyStage: string;
+    operatingSectors: string[];
+    operatingSectorsOther?: string;
+  };
+  sectionB: {
+    motivations: string[]; // max 3
+    motivationsOther?: string;
+    ventureChallenges: string[]; // max 3
+    ventureChallengesOther?: string;
+    resourceDifficultyRatings: Record<string, LikertRating | string>;
+  };
+  sectionC: {
+    fundingChallenges: string[]; // max 3
+    fundingChallengesOther?: string;
+    marketAccessChallenges: string[]; // max 3
+    marketAccessChallengesOther?: string;
+    ecosystemSupportRatings: Record<string, LikertRating | string>;
+  };
+  sectionD: {
+    academicInstitutionSupport: string;
+    academicInstitutionSupportOther?: string;
+    talentChallenges: string[]; // max 3
+    talentChallengesOther?: string;
+  };
+  sectionE: {
+    systemicChallenges: string[]; // max 3
+    systemicChallengesOther?: string;
+    personalExperienceChallenge: string;
+    ecosystemProposedSolution: string;
+  };
+  sectionF: {
+    supportDifference: string[]; // max 3
+    supportDifferenceOther?: string;
+    collaborativeInterest: string;
+  };
+}
+
 export interface SurveyResponse {
   metadata: SurveyMetadata;
   sectionA: SectionAResponse;
@@ -418,6 +498,8 @@ export interface SurveyResponse {
   sectionD: SectionDResponse;
   sectionE: SectionEResponse;
   sectionF: SectionFResponse;
+  organization?: OrganizationSurveyResponse;
+  entrepreneur?: EntrepreneurSurveyResponse;
 }
 
 // ============================================================================

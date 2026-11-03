@@ -15,21 +15,18 @@ import {
   ChevronUp,
   Sparkles,
   Flame,
-  Layers,
-  ExternalLink
+  Layers
 } from 'lucide-react';
 import { ScrollReveal } from '../common/ScrollReveal';
 
 interface HeroSectionProps {
   onStartSurvey: () => void;
   onSelectSection?: (stepNumber: number) => void;
-  onOpenGForm?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ 
   onStartSurvey,
-  onSelectSection,
-  onOpenGForm
+  onSelectSection 
 }) => {
   const [showInstructions, setShowInstructions] = useState(false);
   const [hoveredInquiry, setHoveredInquiry] = useState<number | null>(null);
@@ -147,17 +144,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <span>{showInstructions ? 'Hide Instructions' : 'View Instructions'}</span>
             {showInstructions ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
-
-          {onOpenGForm && (
-            <button
-              type="button"
-              onClick={onOpenGForm}
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-4 rounded-2xl bg-[#0B0A0F] dark:bg-[#CCFF00] text-white dark:text-[#0B0A0F] hover:bg-[#CCFF00] hover:text-[#0B0A0F] dark:hover:bg-white font-bold text-xs uppercase tracking-wider border border-[#0B0A0F]/20 dark:border-white/20 transition-all shadow-midnight-sm hover:-translate-y-0.5 cursor-pointer"
-            >
-              <span>Embedded Google Form</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </button>
-          )}
         </div>
 
         {/* Telemetry Chips (Fluid Strip) */}

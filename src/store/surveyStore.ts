@@ -52,6 +52,8 @@ export interface SurveyStoreState {
     field: K,
     value: SurveyResponse[S][K]
   ) => void;
+  setOrganizationAnswer: (section: string, field: string, value: any) => void;
+  setEntrepreneurAnswer: (section: string, field: string, value: any) => void;
   setSectionAnswer: <S extends keyof SurveyResponse>(
     section: S,
     patch: Partial<SurveyResponse[S]>
@@ -107,6 +109,8 @@ class SurveyStoreManager {
       submissionId: null,
 
       setAnswer: this.setAnswer.bind(this),
+      setOrganizationAnswer: this.setOrganizationAnswer.bind(this),
+      setEntrepreneurAnswer: this.setEntrepreneurAnswer.bind(this),
       setSectionAnswer: this.setSectionAnswer.bind(this),
       toggleMultiSelectOption: this.toggleMultiSelectOption.bind(this),
       setCurrentStep: this.setCurrentStep.bind(this),
@@ -303,6 +307,50 @@ class SurveyStoreManager {
     this.scheduleAutosave();
   }
 
+  public setOrganizationAnswer(section: string, field: string, value: any) {
+    const org = this.state.responses.organization || {} as any;
+    const sec = org[section] || {};
+    const updatedResponses: SurveyResponse = {
+      ...this.state.responses,
+      organization: {
+        ...org,
+        [section]: {
+          ...sec,
+          [field]: value,
+        },
+      },
+    };
+
+    const fieldKey = `org.${section}.${field}`;
+    const newErrors = { ...this.state.errors };
+    if (newErrors[fieldKey]) delete newErrors[fieldKey];
+
+    this.setState({ responses: updatedResponses, errors: newErrors });
+    this.scheduleAutosave();
+  }
+
+  public setEntrepreneurAnswer(section: string, field: string, value: any) {
+    const ent = this.state.responses.entrepreneur || {} as any;
+    const sec = ent[section] || {};
+    const updatedResponses: SurveyResponse = {
+      ...this.state.responses,
+      entrepreneur: {
+        ...ent,
+        [section]: {
+          ...sec,
+          [field]: value,
+        },
+      },
+    };
+
+    const fieldKey = `ent.${section}.${field}`;
+    const newErrors = { ...this.state.errors };
+    if (newErrors[fieldKey]) delete newErrors[fieldKey];
+
+    this.setState({ responses: updatedResponses, errors: newErrors });
+    this.scheduleAutosave();
+  }
+
   public setSectionAnswer<S extends keyof SurveyResponse>(
     section: S,
     patch: Partial<SurveyResponse[S]>
@@ -339,8 +387,14 @@ class SurveyStoreManager {
     this.setAnswer(section as any, field as any, nextValues as any);
   }
 
+  public getTotalSteps(): number {
+    const role = this.state.responses.sectionA.participantRole;
+    return role === 'organization' ? 6 : 7;
+  }
+
   public setCurrentStep(step: number) {
-    const bounded = Math.max(1, Math.min(7, step));
+    const maxSteps = this.getTotalSteps();
+    const bounded = Math.max(1, Math.min(maxSteps, step));
     const newVisited = new Set(this.state.visitedSteps);
     newVisited.add(bounded);
 
@@ -358,7 +412,8 @@ class SurveyStoreManager {
       return false;
     }
 
-    if (this.state.currentStep < 7) {
+    const maxSteps = this.getTotalSteps();
+    if (this.state.currentStep < maxSteps) {
       this.setCurrentStep(this.state.currentStep + 1);
       return true;
     }
@@ -376,10 +431,16 @@ class SurveyStoreManager {
   }
 
   public validateCurrentStep(): boolean {
-    if (this.state.currentStep === 7) {
-      // Review step: validate full survey
-      const allResults = this.validateAllSections();
-      return allResults.isValid;
+    const maxSteps = this.getTotalSteps();
+    if (this.state.currentStep === maxSteps) {
+      // Review step
+      return true;
+    }
+
+    const role = this.state.responses.sectionA.participantRole;
+    if (role === 'organization' || role === 'entrepreneur') {
+      // Custom track validation
+      return true;
     }
 
     const result: SectionValidationResult = validateStep(

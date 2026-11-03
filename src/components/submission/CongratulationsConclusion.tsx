@@ -187,10 +187,18 @@ export const CongratulationsConclusion: React.FC<CongratulationsConclusionProps>
         {/* Main Headline */}
         <div className="space-y-3">
           <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#0B0A0F] dark:text-white tracking-tight leading-tight">
-            Congratulations! You Are Shaping Higher Education in Kerala.
+            {responses.sectionA.participantRole === 'organization'
+              ? 'Congratulations! You Are Shaping Industry & Education in Kerala.'
+              : responses.sectionA.participantRole === 'entrepreneur'
+              ? "Congratulations! You Are Shaping Kerala's Startup Ecosystem."
+              : 'Congratulations! You Are Shaping Higher Education in Kerala.'}
           </h1>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
-            Thank you for taking the time to share your honest lived experiences, challenges, and actionable solutions. Every student voice strengthens our collective blueprint.
+            {responses.sectionA.participantRole === 'organization'
+              ? 'Thank you for sharing your organizational insights, workforce expectations, and partnership opportunities. Your perspective bridges the gap between academia and real-world impact.'
+              : responses.sectionA.participantRole === 'entrepreneur'
+              ? 'Thank you for sharing your entrepreneurial journey, resource bottlenecks, and policy proposals. From ideas to ventures, your insights fuel innovation in Kerala.'
+              : 'Thank you for taking the time to share your honest lived experiences, challenges, and actionable solutions. Every student voice strengthens our collective blueprint.'}
           </p>
         </div>
 

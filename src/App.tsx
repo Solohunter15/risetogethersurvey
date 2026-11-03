@@ -9,17 +9,35 @@ import { CongratulationsConclusion } from './components/submission/Congratulatio
 import { ScrollProgressBar } from './components/common/ScrollProgressBar';
 import { ScrollToTopWidget } from './components/common/ScrollToTopWidget';
 import { AmbientBackground } from './components/common/AmbientBackground';
-import { WIZARD_STEPS } from './types/navigation';
+import { getWizardStepsForRole } from './types/navigation';
 import { useSurveyStore } from './store/surveyStore';
 
-// Sections A-F
+// Common Section A
 import { SectionAAbout } from './components/sections/SectionAAbout';
+
+// Student Track: Sections B-F
 import { SectionBAcademic } from './components/sections/SectionBAcademic';
 import { SectionCInternships } from './components/sections/SectionCInternships';
 import { SectionDCommunities } from './components/sections/SectionDCommunities';
 import { SectionEInstitutional } from './components/sections/SectionEInstitutional';
 import { SectionFVoices } from './components/sections/SectionFVoices';
-import { EmbeddedGFormView } from './components/submission/EmbeddedGFormView';
+
+// Organization Track: Sections B-E
+import {
+  OrgSectionB,
+  OrgSectionC,
+  OrgSectionD,
+  OrgSectionE,
+} from './components/sections/organization/OrganizationSections';
+
+// Entrepreneur Track: Sections B-F
+import {
+  EntSectionB,
+  EntSectionC,
+  EntSectionD,
+  EntSectionE,
+  EntSectionF,
+} from './components/sections/entrepreneur/EntrepreneurSections';
 
 export const App: React.FC = () => {
   const store = useSurveyStore();
@@ -35,8 +53,12 @@ export const App: React.FC = () => {
     resetSurvey,
   } = store;
 
+  const currentRole = store.responses.sectionA.participantRole || 'student';
+  const activeWizardSteps = getWizardStepsForRole(currentRole);
+  const totalSteps = activeWizardSteps.length;
+  const activeMeta = activeWizardSteps[currentStep - 1] || activeWizardSteps[0];
+
   const [viewMode, setViewMode] = useState<'hero' | 'survey'>('hero');
-  const [surveyFormat, setSurveyFormat] = useState<'interactive' | 'gform'>('interactive');
 
   // Smooth scroll to container when step changes in survey mode
   useEffect(() => {
@@ -48,7 +70,6 @@ export const App: React.FC = () => {
     }
   }, [currentStep, viewMode]);
 
-  const activeMeta = WIZARD_STEPS[currentStep - 1] || WIZARD_STEPS[0];
   const stepValidationError = Object.values(errors)[0] || null;
 
   const handleNextStep = () => {
@@ -94,6 +115,77 @@ export const App: React.FC = () => {
     }
   };
 
+  // Render the appropriate section content based on the active role and step
+  const renderStepContent = () => {
+    // Step 1 is always SectionAAbout (which contains the 3 role selector containers, disability question, and role profile questions)
+    if (currentStep === 1) {
+      return <SectionAAbout />;
+    }
+
+    // Last Step is always the Congratulations and Creative Conclusion screen
+    if (currentStep === totalSteps) {
+      return (
+        <CongratulationsConclusion
+          onReturnToHome={() => {
+            setViewMode('hero');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onEditSection={(stepNum) => goToStep(stepNum)}
+        />
+      );
+    }
+
+    // Track 1: Organization Role
+    if (currentRole === 'organization') {
+      switch (currentStep) {
+        case 2:
+          return <OrgSectionB />;
+        case 3:
+          return <OrgSectionC />;
+        case 4:
+          return <OrgSectionD />;
+        case 5:
+          return <OrgSectionE />;
+        default:
+          return <SectionAAbout />;
+      }
+    }
+
+    // Track 2: Entrepreneur Role
+    if (currentRole === 'entrepreneur') {
+      switch (currentStep) {
+        case 2:
+          return <EntSectionB />;
+        case 3:
+          return <EntSectionC />;
+        case 4:
+          return <EntSectionD />;
+        case 5:
+          return <EntSectionE />;
+        case 6:
+          return <EntSectionF />;
+        default:
+          return <SectionAAbout />;
+      }
+    }
+
+    // Track 3: Student Role (Default)
+    switch (currentStep) {
+      case 2:
+        return <SectionBAcademic />;
+      case 3:
+        return <SectionCInternships />;
+      case 4:
+        return <SectionDCommunities />;
+      case 5:
+        return <SectionEInstitutional />;
+      case 6:
+        return <SectionFVoices />;
+      default:
+        return <SectionAAbout />;
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FBF9F4] dark:bg-[#0B0A0F] text-[#0B0A0F] dark:text-[#FBF9F4] transition-colors duration-300 relative selection:bg-[#CCFF00] selection:text-[#0B0A0F]">
       
@@ -106,7 +198,6 @@ export const App: React.FC = () => {
       {/* 1. Header with Autosave status & View Switcher */}
       <Header
         currentStep={currentStep}
-        totalSteps={WIZARD_STEPS.length}
         lastSavedAt={lastSavedAt}
         isSaving={isSaving}
         activeView={viewMode}
@@ -126,107 +217,58 @@ export const App: React.FC = () => {
           <HeroSection
             onStartSurvey={handleStartSurvey}
             onSelectSection={handleSelectSection}
-            onOpenGForm={() => {
-              setViewMode('survey');
-              setSurveyFormat('gform');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
           />
         ) : (
-          /* VIEW 2: STEP-BY-STEP SURVEY CHAPTERS OR EMBEDDED GFORM */
+          /* VIEW 2: STEP-BY-STEP SURVEY CHAPTERS */
           <div className="space-y-8 animate-flowIn">
-            
-            {/* Survey Format Switcher (Interactive vs Official Embedded Google Form) */}
-            <div className="flex items-center justify-between p-1.5 rounded-2xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs max-w-sm mx-auto">
-              <button
-                type="button"
-                onClick={() => setSurveyFormat('interactive')}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  surveyFormat === 'interactive'
-                    ? 'bg-[#0B0A0F] dark:bg-[#CCFF00] text-white dark:text-[#0B0A0F] shadow-midnight-sm'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-[#0B0A0F] dark:hover:text-white'
-                }`}
-              >
-                ✨ Interactive Mode
-              </button>
-              <button
-                type="button"
-                onClick={() => setSurveyFormat('gform')}
-                className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  surveyFormat === 'gform'
-                    ? 'bg-[#0B0A0F] dark:bg-[#CCFF00] text-white dark:text-[#0B0A0F] shadow-midnight-sm'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-[#0B0A0F] dark:hover:text-white'
-                }`}
-              >
-                📝 Embedded Google Form
-              </button>
-            </div>
+            {/* Step Pipeline Indicator */}
+            <ProgressBar
+              currentStep={currentStep}
+              visitedSteps={visitedSteps}
+              wizardSteps={activeWizardSteps}
+              onStepClick={(step) => goToStep(step)}
+              onReturnToHero={() => {
+                setViewMode('hero');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
 
-            {surveyFormat === 'gform' ? (
-              <EmbeddedGFormView onSwitchToInteractive={() => setSurveyFormat('interactive')} />
-            ) : (
-              <>
-                {/* Step Pipeline Indicator */}
-                <ProgressBar
-                  currentStep={currentStep}
-                  visitedSteps={visitedSteps}
-                  onStepClick={(step) => goToStep(step)}
-                  onReturnToHero={() => {
-                    setViewMode('hero');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                />
-
-                {/* Dynamic Survey Question Container */}
-                <section
-                  id="survey-active-container"
-                  aria-live="polite"
-                  className="bg-white dark:bg-[#121118] border border-[#0B0A0F]/15 dark:border-white/10 rounded-3xl p-6 sm:p-10 md:p-12 shadow-glass dark:shadow-glass-dark transition-all"
-                >
-                  {/* Section Header (Sections B to F; Section A has custom Purple Movement display heading) */}
-                  {currentStep > 1 && currentStep < 7 && (
-                    <div className="mb-8 pb-5 border-b border-[#0B0A0F]/10 dark:border-white/10">
-                      <div className="flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-[#0B0A0F] dark:text-[#CCFF00] font-black mb-1.5">
-                        <span className="bg-[#CCFF00] text-[#0B0A0F] px-2.5 py-1 rounded-lg font-black tracking-wider border border-[#0B0A0F]/20">
-                          {`SECTION ${activeMeta.code} OF 6`}
-                        </span>
-                      </div>
-                      <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white tracking-tight">
-                        {activeMeta.title}
-                      </h2>
-                      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-1.5 font-sans leading-relaxed">
-                        {activeMeta.subtitle}
-                      </p>
-                    </div>
-                  )}
+            {/* Dynamic Survey Question Container */}
+            <section
+              id="survey-active-container"
+              aria-live="polite"
+              className="bg-white dark:bg-[#121118] border border-[#0B0A0F]/15 dark:border-white/10 rounded-3xl p-6 sm:p-10 md:p-12 shadow-glass dark:shadow-glass-dark transition-all"
+            >
+              {/* Section Header (Sections B to Penultimate; Section A has custom Purple Movement display heading) */}
+              {currentStep > 1 && currentStep < totalSteps && (
+                <div className="mb-8 pb-5 border-b border-[#0B0A0F]/10 dark:border-white/10">
+                  <div className="flex items-center space-x-2 font-mono text-xs uppercase tracking-wider text-[#0B0A0F] dark:text-[#CCFF00] font-black mb-1.5">
+                    <span className="bg-[#CCFF00] text-[#0B0A0F] px-2.5 py-1 rounded-lg font-black tracking-wider border border-[#0B0A0F]/20">
+                      {`SECTION ${activeMeta.code} OF ${totalSteps - 1}`}
+                    </span>
+                  </div>
+                  <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#0B0A0F] dark:text-white tracking-tight">
+                    {activeMeta.title}
+                  </h2>
+                  <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-1.5 font-sans leading-relaxed">
+                    {activeMeta.subtitle}
+                  </p>
+                </div>
+              )}
 
               {/* Wizard Step Switcher with Smooth Slide-in Transition */}
-              <div key={currentStep} className="space-y-8 animate-fadeInUp">
-                {currentStep === 1 && <SectionAAbout />}
-                {currentStep === 2 && <SectionBAcademic />}
-                {currentStep === 3 && <SectionCInternships />}
-                {currentStep === 4 && <SectionDCommunities />}
-                {currentStep === 5 && <SectionEInstitutional />}
-                {currentStep === 6 && <SectionFVoices />}
-                {currentStep === 7 && (
-                  <CongratulationsConclusion
-                    onReturnToHome={() => {
-                      setViewMode('hero');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    onEditSection={(stepNum) => goToStep(stepNum)}
-                  />
-                )}
+              <div key={`${currentRole}-${currentStep}`} className="space-y-8 animate-fadeInUp">
+                {renderStepContent()}
               </div>
 
               {/* Bottom Navigation */}
-              {currentStep < 7 && (
+              {currentStep < totalSteps && (
                 <WizardNav
                   currentStep={currentStep}
-                  totalSteps={WIZARD_STEPS.length}
+                  totalSteps={totalSteps}
                   onPrev={prevStep}
                   onNext={handleNextStep}
-                  onJumpToReview={() => goToStep(7)}
+                  onJumpToReview={() => goToStep(totalSteps)}
                   onBackToHero={() => {
                     setViewMode('hero');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -234,11 +276,10 @@ export const App: React.FC = () => {
                   canProceed={true}
                   validationError={stepValidationError}
                   isSubmitting={false}
+                  nextSectionTitle={activeWizardSteps[currentStep]?.shortTitle}
                 />
               )}
             </section>
-              </>
-            )}
           </div>
         )}
       </main>
