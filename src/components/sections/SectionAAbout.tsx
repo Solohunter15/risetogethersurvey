@@ -5,7 +5,7 @@ import {
   UniversityId,
   CommunityId,
   DifferentlyAbledStatus,
-  EntrepreneurStatus,
+  ParticipantRole,
 } from '../../types/survey';
 import { SURVEY_QUESTIONS } from '../../data/surveyContent';
 import { useSurveyStore } from '../../store/surveyStore';
@@ -21,7 +21,11 @@ import {
   Briefcase,
   HelpCircle,
   Rocket,
+  Building2,
   Accessibility,
+  HeartHandshake,
+  CheckCircle2,
+  ShieldAlert,
 } from 'lucide-react';
 
 export interface SectionAAboutProps {
@@ -133,6 +137,18 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
     }
   };
 
+  const currentRole = data.participantRole || (data.isEntrepreneur && data.isEntrepreneur !== 'no' ? 'entrepreneur' : 'student');
+
+  const handleRoleSelect = (role: ParticipantRole) => {
+    if (isReadOnly) return;
+    onChange('participantRole', role);
+    if (role === 'entrepreneur') {
+      onChange('isEntrepreneur', 'yes_founder');
+    } else if (role === 'student') {
+      onChange('isEntrepreneur', 'no');
+    }
+  };
+
   return (
     <div className="space-y-8 animate-fadeIn" data-testid="section-a-about">
       
@@ -149,7 +165,231 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
       </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 1: ACADEMIC STATUS BOX CONTAINER                            */}
+      {/* 1. THREE CONTAINERS AT FIRST: STUDENT, ENTREPRENEUR, OR ORGANIZATION  */}
+      {/* ==================================================================== */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="text-sm font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-slate-300">
+            Are you a student, entrepreneur, or organization?
+            <span className="text-[#0B0A0F] dark:text-[#CCFF00] font-black ml-1">*</span>
+          </div>
+          <span className="text-xs text-slate-500 font-medium italic">
+            Select one.
+          </span>
+        </div>
+
+        {/* 3 Containers Grid */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="radiogroup" aria-label="Participant Role">
+            
+            {/* Container 1: Student */}
+            <div
+              role="radio"
+              aria-checked={currentRole === 'student'}
+              tabIndex={isReadOnly ? -1 : 0}
+              onClick={() => handleRoleSelect('student')}
+              onKeyDown={(e) => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                  e.preventDefault();
+                  handleRoleSelect('student');
+                }
+              }}
+              className={`p-5 rounded-xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
+                currentRole === 'student'
+                  ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
+                  : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:-translate-y-0.5'
+              } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <div
+                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold transition-colors ${
+                    currentRole === 'student'
+                      ? 'bg-[#0B0A0F] text-[#CCFF00] dark:bg-[#CCFF00] dark:text-[#0B0A0F]'
+                      : 'bg-[#0B0A0F]/8 dark:bg-white/10 text-[#0B0A0F] dark:text-white'
+                  }`}
+                >
+                  <GraduationCap className="w-3.5 h-3.5" />
+                  <span>Student</span>
+                </div>
+                <div
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                    currentRole === 'student'
+                      ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]'
+                      : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800'
+                  }`}
+                >
+                  {currentRole === 'student' && (
+                    <span className="w-2 h-2 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />
+                  )}
+                </div>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
+                Students, creators, and researchers enrolled in higher education or learning pathways in Kerala.
+              </p>
+            </div>
+
+            {/* Container 2: Entrepreneur */}
+            <div
+              role="radio"
+              aria-checked={currentRole === 'entrepreneur'}
+              tabIndex={isReadOnly ? -1 : 0}
+              onClick={() => handleRoleSelect('entrepreneur')}
+              onKeyDown={(e) => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                  e.preventDefault();
+                  handleRoleSelect('entrepreneur');
+                }
+              }}
+              className={`p-5 rounded-xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
+                currentRole === 'entrepreneur'
+                  ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
+                  : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:-translate-y-0.5'
+              } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <div
+                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold transition-colors ${
+                    currentRole === 'entrepreneur'
+                      ? 'bg-[#0B0A0F] text-[#CCFF00] dark:bg-[#CCFF00] dark:text-[#0B0A0F]'
+                      : 'bg-[#0B0A0F]/8 dark:bg-white/10 text-[#0B0A0F] dark:text-white'
+                  }`}
+                >
+                  <Rocket className="w-3.5 h-3.5" />
+                  <span>Entrepreneur</span>
+                </div>
+                <div
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                    currentRole === 'entrepreneur'
+                      ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]'
+                      : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800'
+                  }`}
+                >
+                  {currentRole === 'entrepreneur' && (
+                    <span className="w-2 h-2 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />
+                  )}
+                </div>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
+                Founders, student startup creators, and business builders turning ideas into active ventures.
+              </p>
+            </div>
+
+            {/* Container 3: Organization */}
+            <div
+              role="radio"
+              aria-checked={currentRole === 'organization'}
+              tabIndex={isReadOnly ? -1 : 0}
+              onClick={() => handleRoleSelect('organization')}
+              onKeyDown={(e) => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                  e.preventDefault();
+                  handleRoleSelect('organization');
+                }
+              }}
+              className={`p-5 rounded-xl border text-left cursor-pointer transition-all duration-200 select-none flex flex-col justify-between group ${
+                currentRole === 'organization'
+                  ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/15 dark:ring-[#CCFF00]/30'
+                  : 'border-[#0B0A0F]/12 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/40 hover:-translate-y-0.5'
+              } ${isReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <div
+                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold transition-colors ${
+                    currentRole === 'organization'
+                      ? 'bg-[#0B0A0F] text-[#CCFF00] dark:bg-[#CCFF00] dark:text-[#0B0A0F]'
+                      : 'bg-[#0B0A0F]/8 dark:bg-white/10 text-[#0B0A0F] dark:text-white'
+                  }`}
+                >
+                  <Building2 className="w-3.5 h-3.5" />
+                  <span>Organization</span>
+                </div>
+                <div
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                    currentRole === 'organization'
+                      ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]'
+                      : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800'
+                  }`}
+                >
+                  {currentRole === 'organization' && (
+                    <span className="w-2 h-2 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />
+                  )}
+                </div>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-400 font-sans leading-relaxed">
+                Educational institutions, student communities (IEDC, μLearn, TinkerHub), companies, and labs.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 2. QUESTION ABOUT DISABILITY (DIFFERENTLY-ABLED PERSON)               */}
+      {/* ==================================================================== */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4" data-testid="question-differently-abled">
+        <div className="flex items-center justify-between">
+          <div className="text-sm font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-slate-300 flex items-center space-x-2">
+            <Accessibility className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00]" />
+            <span>Do you identify as a Differently-Abled person?</span>
+          </div>
+          <span className="text-xs text-slate-500 font-medium italic">
+            Select one option.
+          </span>
+        </div>
+
+        {/* Choices Box Container */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Differently-Abled Identification">
+            {[
+              { id: 'yes', label: 'Yes (Registered)', desc: 'Documented benchmark disability; accessing accommodation or assistive support.', icon: Accessibility },
+              { id: 'yes_self', label: 'Yes (Self-identified)', desc: 'Neurodivergent, sensory needs, or conditions requiring accommodations.', icon: HeartHandshake },
+              { id: 'no', label: 'No', desc: 'Do not identify as differently-abled.', icon: CheckCircle2 },
+              { id: 'prefer_not_to_say', label: 'Prefer not to say', desc: 'Choose to keep this demographic information private.', icon: ShieldAlert },
+            ].map((opt) => {
+              const isSelected = data.isDifferentlyAbled === opt.id || (opt.id === 'yes_self' && data.isDifferentlyAbled === 'yes');
+              const Icon = opt.icon;
+
+              return (
+                <div
+                  key={opt.id}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={isReadOnly ? -1 : 0}
+                  onClick={() => !isReadOnly && onChange('isDifferentlyAbled', (opt.id === 'yes_self' ? 'yes' : opt.id) as DifferentlyAbledStatus)}
+                  onKeyDown={(e) => {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                      e.preventDefault();
+                      if (!isReadOnly) onChange('isDifferentlyAbled', (opt.id === 'yes_self' ? 'yes' : opt.id) as DifferentlyAbledStatus);
+                    }
+                  }}
+                  className={`p-4 rounded-xl border text-left cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                    isSelected
+                      ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] shadow-sm ring-1 ring-[#0B0A0F]/10 dark:ring-[#CCFF00]/20'
+                      : 'border-[#0B0A0F]/10 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/30 hover:-translate-y-0.5'
+                  }`}
+                >
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center space-x-1.5 font-bold text-xs text-[#0B0A0F] dark:text-white">
+                      <Icon className="w-3.5 h-3.5 text-[#0B0A0F] dark:text-[#CCFF00]" />
+                      <span>{opt.label}</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">{opt.desc}</p>
+                  </div>
+                  <div className={`w-4 h-4 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center ${
+                    isSelected ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]' : 'border-slate-300 dark:border-slate-600'
+                  }`}>
+                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* ==================================================================== */}
+      {/* 3. QUESTION 1: ACADEMIC STATUS BOX CONTAINER                         */}
       {/* ==================================================================== */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-4" data-testid="question-q1">
         <div className="flex items-center justify-between">
@@ -281,7 +521,7 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
       </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 2: University, College & Programme Box Container            */}
+      {/* 4. QUESTION 2: University, College & Programme Box Container          */}
       {/* ==================================================================== */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-5" data-testid="question-q2">
         <DropdownSelect
@@ -363,7 +603,7 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
       </div>
 
       {/* ==================================================================== */}
-      {/* QUESTION 3: Student Communities & Level of Involvement Box Container */}
+      {/* 5. QUESTION 3: Student Communities & Level of Involvement Container   */}
       {/* ==================================================================== */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-6" data-testid="question-q3">
         <CheckboxMulti
@@ -404,111 +644,6 @@ export const SectionAAbout: React.FC<SectionAAboutProps> = (props) => {
             disabled={isReadOnly || (data.communities || []).includes('none')}
             testId="question-q3-involvement"
           />
-        </div>
-      </div>
-
-      {/* ==================================================================== */}
-      {/* DEMOGRAPHIC CONTEXT CARDS BOX CONTAINER                              */}
-      {/* ==================================================================== */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14121F] border border-[#0B0A0F]/12 dark:border-white/10 shadow-xs space-y-6">
-        <div>
-          <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#0B0A0F] dark:text-[#CCFF00] bg-[#CCFF00]/30 dark:bg-[#CCFF00]/10 px-2.5 py-1 rounded-md">
-            DEMOGRAPHIC CONTEXT
-          </span>
-          <h3 className="font-display font-bold text-lg text-[#0B0A0F] dark:text-white mt-2">
-            Accessibility & Entrepreneurial Background
-          </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            Helps assess inclusivity, accommodations, and student venture participation statewide.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-          
-          {/* Differently-Abled Inquiry Box Container */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10 shadow-xs flex flex-col justify-between space-y-4">
-            <div>
-              <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-slate-300">
-                <Accessibility className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00]" />
-                <span>Do you identify as a Differently-Abled person?</span>
-              </div>
-              <p className="text-xs text-slate-500 mt-0.5 italic">Select one option.</p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-2.5">
-              {[
-                { id: 'yes', label: 'Yes', desc: 'Registered disability or conditions requiring campus accommodations.' },
-                { id: 'no', label: 'No', desc: 'Do not identify as differently-abled.' },
-                { id: 'prefer_not_to_say', label: 'Prefer not to say', desc: 'Keep this demographic detail private.' },
-              ].map((opt) => {
-                const isSelected = data.isDifferentlyAbled === opt.id;
-                return (
-                  <div
-                    key={opt.id}
-                    onClick={() => !isReadOnly && onChange('isDifferentlyAbled', opt.id as DifferentlyAbledStatus)}
-                    className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all flex items-start justify-between gap-3 ${
-                      isSelected
-                        ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] ring-1 ring-[#0B0A0F]/10 dark:ring-[#CCFF00]/20'
-                        : 'border-[#0B0A0F]/10 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/30'
-                    }`}
-                  >
-                    <div>
-                      <span className="text-xs font-bold text-[#0B0A0F] dark:text-white block">{opt.label}</span>
-                      <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">{opt.desc}</span>
-                    </div>
-                    <div className={`w-4 h-4 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center ${
-                      isSelected ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]' : 'border-slate-300 dark:border-slate-600'
-                    }`}>
-                      {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Entrepreneurship Inquiry Box Container */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-[#FBF9F4] dark:bg-[#181622]/80 border border-[#0B0A0F]/10 dark:border-white/10 shadow-xs flex flex-col justify-between space-y-4">
-            <div>
-              <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-[#0B0A0F] dark:text-slate-300">
-                <Rocket className="w-4 h-4 text-[#0B0A0F] dark:text-[#CCFF00]" />
-                <span>Are you an entrepreneur owning / part of a business?</span>
-              </div>
-              <p className="text-xs text-slate-500 mt-0.5 italic">Select one option.</p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-2.5">
-              {[
-                { id: 'yes_founder', label: 'Yes — Founder', desc: 'Running or founding a registered business, startup, or venture.' },
-                { id: 'yes_part_of_venture', label: 'Yes — Part of Team', desc: 'Core contributor or team member in an early student startup.' },
-                { id: 'no', label: 'No', desc: 'Focusing on academic studies, projects, and career exploration.' },
-              ].map((opt) => {
-                const isSelected = data.isEntrepreneur === opt.id;
-                return (
-                  <div
-                    key={opt.id}
-                    onClick={() => !isReadOnly && onChange('isEntrepreneur', opt.id as EntrepreneurStatus)}
-                    className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all flex items-start justify-between gap-3 ${
-                      isSelected
-                        ? 'border-2 border-[#0B0A0F] dark:border-[#CCFF00] bg-white dark:bg-[#1F1C2E] ring-1 ring-[#0B0A0F]/10 dark:ring-[#CCFF00]/20'
-                        : 'border-[#0B0A0F]/10 dark:border-white/10 bg-white dark:bg-[#14121F] hover:border-[#0B0A0F] dark:hover:border-white/30'
-                    }`}
-                  >
-                    <div>
-                      <span className="text-xs font-bold text-[#0B0A0F] dark:text-white block">{opt.label}</span>
-                      <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">{opt.desc}</span>
-                    </div>
-                    <div className={`w-4 h-4 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center ${
-                      isSelected ? 'border-[#0B0A0F] dark:border-[#CCFF00] bg-[#CCFF00] dark:bg-[#0B0A0F]' : 'border-slate-300 dark:border-slate-600'
-                    }`}>
-                      {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#0B0A0F] dark:bg-[#CCFF00]" />}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
         </div>
       </div>
 

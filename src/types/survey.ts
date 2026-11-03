@@ -45,6 +45,7 @@ export type UniversityId =
 
 export type DifferentlyAbledStatus = 'yes' | 'no' | 'prefer_not_to_say' | '';
 export type EntrepreneurStatus = 'yes_founder' | 'yes_part_of_venture' | 'no' | '';
+export type ParticipantRole = 'student' | 'entrepreneur' | 'organization' | '';
 
 export type CommunityId =
   | 'foss'
@@ -362,6 +363,7 @@ export interface SectionAResponse {
   involvementLevel: CommunityInvolvementLevel | CommunityInvolvementLevel[] | '';
   isDifferentlyAbled?: DifferentlyAbledStatus;
   isEntrepreneur?: EntrepreneurStatus;
+  participantRole?: ParticipantRole;
 }
 
 export interface SectionBResponse {

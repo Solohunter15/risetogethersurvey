@@ -838,6 +838,7 @@ export const createInitialSurveyResponse = (): SurveyResponse => ({
     involvementLevel: '',
     isDifferentlyAbled: '',
     isEntrepreneur: '',
+    participantRole: '',
   },
   sectionB: {
     overallExperience: [],
